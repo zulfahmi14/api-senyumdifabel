@@ -1,4 +1,5 @@
 package com.example.senyumdifabel.userfriends;
+import com.example.senyumdifabel.user.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
