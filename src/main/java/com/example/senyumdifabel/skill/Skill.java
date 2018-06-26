@@ -11,11 +11,15 @@ public class Skill {
     @Column (nullable = false)
     protected String skill ;
 
+    @Column(nullable = false)
+    protected Long user_id ;
+
     public Skill() {
     }
 
-    public Skill(String skill) {
+    public Skill(String skill, Long user_id) {
         this.skill = skill;
+        this.user_id = user_id;
     }
 
     public Long getId() {
@@ -32,5 +36,13 @@ public class Skill {
 
     public void setSkill(String skill) {
         this.skill = skill;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }
