@@ -15,21 +15,21 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/registerz")
     public User register(@RequestBody User user){
         return userRepository.save(user);
     }
-
-    @GetMapping("/getusers")
-    public List<User> show(){
-        return userRepository.findAll();
-    }
-
-    @GetMapping("/getuser/{id}")
-    public User getuser(@PathVariable(value = "id") Long id){
-        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
-    }
-
+//
+//    @GetMapping("/getusers")
+//    public List<User> show(){
+//        return userRepository.findAll();
+//    }
+//
+//    @GetMapping("/getuser/{id}")
+//    public User getuser(@PathVariable(value = "id") Long id){
+//        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+//    }
+//
     @PutMapping("/updateuser/{id}")
     public User updateuser(@PathVariable(value = "id") Long id, @RequestBody User usernew){
         User userold = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
@@ -38,11 +38,11 @@ public class UserController {
         userold.setUser_password(usernew.getUser_password());
         return userRepository.save(userold);
     }
-
-    @DeleteMapping("/deleteuser/{id}")
-    public boolean deleteuser(@PathVariable(value = "id") Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
-        userRepository.delete(user);
-        return true;
-    }
+//
+//    @DeleteMapping("/deleteuser/{id}")
+//    public boolean deleteuser(@PathVariable(value = "id") Long id){
+//        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+//        userRepository.delete(user);
+//        return true;
+//    }
 }
