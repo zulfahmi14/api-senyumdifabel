@@ -1,5 +1,6 @@
 package com.example.senyumdifabel.people;
 import com.example.senyumdifabel.education.Education;
+import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.user.User;
 
@@ -22,8 +23,11 @@ public class People extends User {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
-    protected Set<Education> comments = new HashSet<>();
+    protected Set<Education> educations = new HashSet<>();
 
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    protected Set<Experience> experiences = new HashSet<>();
 
 //    @Column(nullable = false)
     protected String cv;
