@@ -38,6 +38,7 @@ public class PeopleController {
         peopleold.setUser_password(peoplenew.getUser_password());
         peopleold.setUser_address(peoplenew.getUser_address());
         peopleold.setUser_contact(peoplenew.getUser_contact());
+        peopleold.setUser_photo(peoplenew.getUser_photo());
         return peopleRepository.save(peopleold);
     }
     @PutMapping("/updatecv/{id}")

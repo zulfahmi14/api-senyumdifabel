@@ -8,17 +8,9 @@ import java.util.Set;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "User_Group",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = { @JoinColumn(name = "id_prev")}
-
-    )
-    protected Set<PrevGroup> myGroup = new HashSet<>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long user_id;
 
     @Column(nullable = false)
@@ -38,21 +30,13 @@ public class User {
     public User() {
     }
 
-    public User(Set<PrevGroup> myGroup, String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact) {
-        this.myGroup = myGroup;
+    public User(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact) {
         this.user_name = user_name;
         this.user_email = user_email;
         this.user_password = user_password;
         this.user_address = user_address;
         this.user_photo = user_photo;
         this.user_contact = user_contact;
-    }
-    public Set<PrevGroup> getPrevGroups() {
-        return myGroup;
-    }
-
-    public void setPrevGroups(Set<PrevGroup> myGroup) {
-        this.myGroup = myGroup;
     }
 
     public Long getUser_id() {

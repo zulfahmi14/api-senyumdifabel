@@ -1,6 +1,6 @@
 package com.example.senyumdifabel.prevGroup;
 
-import com.example.senyumdifabel.user.User;
+import com.example.senyumdifabel.people.People;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,10 +9,10 @@ import java.util.Set;
 @Entity
 public class PrevGroup {
     @ManyToMany(mappedBy = "myGroup")
-    private Set<User> users = new HashSet<>();
+    private Set<People> peoples = new HashSet<>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id_prev;
 
     @Column (nullable = false)
@@ -32,8 +32,8 @@ public class PrevGroup {
     public PrevGroup() {
     }
 
-    public PrevGroup(Set<User> users, String group_name, String photo, String date, String time, String prev_chat) {
-        this.users = users;
+    public PrevGroup(Set<People> peoples, String group_name, String photo, String date, String time, String prev_chat) {
+        this.peoples = peoples;
         this.group_name = group_name;
         this.photo = photo;
         this.date = date;
@@ -41,12 +41,12 @@ public class PrevGroup {
         this.prev_chat = prev_chat;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public Set<People> getPeoples() {
+        return peoples;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setPeoples(Set<People> peoples) {
+        this.peoples = peoples;
     }
 
     public Long getId() {
