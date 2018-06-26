@@ -11,11 +11,19 @@ public class Proposal {
     @Column(nullable = false)
     protected Long status ;
 
+    @Column(nullable = false)
+    protected Long company_id ;
+
+    @Column(nullable = false)
+    protected Long people_id ;
+
     public Proposal() {
     }
 
-    public Proposal(Long status) {
+    public Proposal(Long status, Long company_id, Long people_id) {
         this.status = status;
+        this.company_id = company_id;
+        this.people_id = people_id;
     }
 
     public Long getId() {
@@ -32,5 +40,21 @@ public class Proposal {
 
     public void setStatus(Long status) {
         this.status = status;
+    }
+
+    public Long getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(Long company_id) {
+        this.company_id = company_id;
+    }
+
+    public Long getPeople_id() {
+        return people_id;
+    }
+
+    public void setPeople_id(Long people_id) {
+        this.people_id = people_id;
     }
 }

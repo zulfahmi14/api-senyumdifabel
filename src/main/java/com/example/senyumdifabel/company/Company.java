@@ -19,7 +19,7 @@ public class Company extends User {
     protected Set<Job> jobs = new HashSet<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "company_id")
     protected Set<Proposal> proposals = new HashSet<>();
 
     public Company() {
