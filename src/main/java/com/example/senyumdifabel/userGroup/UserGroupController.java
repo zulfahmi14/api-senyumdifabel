@@ -1,8 +1,9 @@
 package com.example.senyumdifabel.userGroup;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.senyumdifabel.ResourceNotFoundException;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserGroupController {
@@ -17,4 +18,8 @@ public class UserGroupController {
         return userGroupRepository.save(userGroup);
     }
 
+    @GetMapping("/myGroup/{id}")
+    public List<UserGroup> myGroup(@PathVariable(value = "id") Long id){
+        return userGroupRepository.findMyGroup(id) ;
+    }
 }

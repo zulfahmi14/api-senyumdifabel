@@ -38,13 +38,20 @@ public class PeopleController {
         peopleold.setUser_password(peoplenew.getUser_password());
         peopleold.setUser_address(peoplenew.getUser_address());
         peopleold.setUser_contact(peoplenew.getUser_contact());
-        peopleold.setUser_photo(peoplenew.getUser_photo());
+//        peopleold.setUser_photo(peoplenew.getUser_photo());
         return peopleRepository.save(peopleold);
     }
     @PutMapping("/updatecv/{id}")
     public People updatecv(@PathVariable(value = "id") Long id, @RequestBody People peoplenew){
         People peopleold = peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setCv(peoplenew.getCv());
+        return peopleRepository.save(peopleold);
+    }
+
+    @PutMapping("/updatephoto/{id}")
+    public People updatephoto(@PathVariable(value = "id") Long id, @RequestBody People peoplenew){
+        People peopleold = peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+        peopleold.setUser_photo(peoplenew.getUser_photo());
         return peopleRepository.save(peopleold);
     }
 

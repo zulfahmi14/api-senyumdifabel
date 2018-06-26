@@ -4,6 +4,7 @@ import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.skill.Skill;
 import com.example.senyumdifabel.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class People extends User {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
-    protected Set<Education> educations = new HashSet<>();
+    private List<Education> educations = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
@@ -45,9 +46,12 @@ public class People extends User {
         this.cv = cv;
     }
 
-    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, Set<PrevGroup> myGroup, String cv) {
+    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, Set<PrevGroup> myGroup, List<Education> educations, Set<Experience> experiences, Set<Skill> skills, String cv) {
         super(user_name, user_email, user_password, user_address, user_photo, user_contact);
         this.myGroup = myGroup;
+        this.educations = educations;
+        this.experiences = experiences;
+        this.skills = skills;
         this.cv = cv;
     }
 
@@ -59,11 +63,40 @@ public class People extends User {
         this.cv = cv;
     }
 
+    @JsonIgnore
     public Set<PrevGroup> getMyGroup() {
         return myGroup;
     }
 
     public void setMyGroup(Set<PrevGroup> myGroup) {
         this.myGroup = myGroup;
+    }
+
+    @JsonIgnore
+    public List<Education> getEducations() {
+        return educations;
+    }
+
+    @JsonIgnore
+    public void setEducations(List<Education> educations) {
+        this.educations = educations;
+    }
+
+    @JsonIgnore
+    public Set<Experience> getExperiences() {
+        return experiences;
+    }
+
+    public void setExperiences(Set<Experience> experiences) {
+        this.experiences = experiences;
+    }
+
+    @JsonIgnore
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
     }
 }

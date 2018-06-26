@@ -17,13 +17,17 @@ public class Experience {
     @Column(nullable = false)
     protected String year ;
 
+    @Column(nullable = false)
+    protected Long user_id ;
+
     public Experience() {
     }
 
-    public Experience(String title, String description, String year) {
+    public Experience(String title, String description, String year, Long user_id) {
         this.title = title;
         this.description = description;
         this.year = year;
+        this.user_id = user_id;
     }
 
     public Long getId() {
@@ -56,5 +60,13 @@ public class Experience {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }
