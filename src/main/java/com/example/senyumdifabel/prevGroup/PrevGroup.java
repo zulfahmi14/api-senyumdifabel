@@ -1,5 +1,4 @@
 package com.example.senyumdifabel.prevGroup;
-
 import com.example.senyumdifabel.people.People;
 
 import javax.persistence.*;
