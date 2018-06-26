@@ -17,23 +17,23 @@ public class TimelineController {
         this.timelineRepository = timelineRepository;
     }
 
-    @PostMapping("/posttimeline")
-    public Timeline posttimeline(@RequestBody Timeline timeline){
+    @PostMapping("/postTimeline")
+    public Timeline postTimeline(@RequestBody Timeline timeline){
         return timelineRepository.save(timeline);
     }
 
-    @GetMapping("/gettimelines")
+    @GetMapping("/getTimelines")
     public List<Timeline> show(){
         return timelineRepository.findAll();
     }
 
-    @GetMapping("/gettimeline/{id}")
-    public Timeline gettimeline(@PathVariable(value = "id") Long id){
+    @GetMapping("/getTimeline/{id}")
+    public Timeline getTimeline(@PathVariable(value = "id") Long id){
         return timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
     }
 
-    @DeleteMapping("/deletetimeline/{id}")
-    public boolean deletetimeline(@PathVariable(value = "id") Long id){
+    @DeleteMapping("/deleteTimeline/{id}")
+    public boolean deleteTimeline(@PathVariable(value = "id") Long id){
         Timeline timeline = timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         timelineRepository.delete(timeline);
         return true;

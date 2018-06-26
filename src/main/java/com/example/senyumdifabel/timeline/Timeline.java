@@ -9,7 +9,7 @@ public class Timeline {
     protected Long timeline_id;
 
     @Column(nullable = false)
-    protected Long user_id;
+    protected Long people_id;
     @Column(nullable = false)
     protected String timeline_description;
     @Column(nullable = false)
@@ -17,13 +17,15 @@ public class Timeline {
     @Column(nullable = false)
     protected String timeline_time;
 
+    protected String timeline_photo;
+
 //    Constructor
     public Timeline(){
 
     }
 
-    public Timeline(Long user_id, String timeline_description, String timeline_date, String timeline_time) {
-        this.user_id = user_id;
+    public Timeline(Long people_id, String timeline_description, String timeline_date, String timeline_time) {
+        this.people_id = people_id;
         this.timeline_description = timeline_description;
         this.timeline_date = timeline_date;
         this.timeline_time = timeline_time;
@@ -36,8 +38,8 @@ public class Timeline {
 
 
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getPeople_id() {
+        return people_id;
     }
 
     public String getTimeline_description() {
@@ -58,8 +60,8 @@ public class Timeline {
         this.timeline_id = timeline_id;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setPeople_id(Long people_id) {
+        this.people_id = people_id;
     }
 
     public void setTimeline_description(String timeline_description) {
