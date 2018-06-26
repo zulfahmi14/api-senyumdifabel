@@ -1,9 +1,12 @@
 package com.example.senyumdifabel.people;
+import com.example.senyumdifabel.education.Education;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,6 +19,12 @@ public class People extends User {
 
     )
     protected Set<PrevGroup> myGroup = new HashSet<>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    protected Set<Education> comments = new HashSet<>();
+
+
 //    @Column(nullable = false)
     protected String cv;
 

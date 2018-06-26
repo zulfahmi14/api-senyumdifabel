@@ -10,5 +10,5 @@ public class CompanyController {
         this.companyRepository = companyRepository;
     }
 
-    
+
 }
