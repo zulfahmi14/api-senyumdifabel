@@ -11,4 +11,5 @@ import java.util.List;
 public interface PrevGroupRepository extends JpaRepository< PrevGroup, Long> {
     @Query("select peoples from PrevGroup u where u.id_prev = ?1")
     List<People> findMember(Long user_id);
+
 }
