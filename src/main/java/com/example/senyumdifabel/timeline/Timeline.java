@@ -1,6 +1,12 @@
 package com.example.senyumdifabel.timeline;
 
+
+import com.example.senyumdifabel.comment.Comment;
+import com.example.senyumdifabel.likes.Likes;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Timeline {
@@ -18,6 +24,14 @@ public class Timeline {
     protected String timeline_time;
 
     protected String timeline_photo;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "timeline_id")
+    private List<Likes> likes = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "timeline_id")
+    private List<Comment> comment = new ArrayList<>();
 
 //    Constructor
     public Timeline(){

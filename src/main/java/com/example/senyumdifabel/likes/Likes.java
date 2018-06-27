@@ -1,9 +1,9 @@
-package com.example.senyumdifabel.like;
+package com.example.senyumdifabel.likes;
 
 import javax.persistence.*;
 
 @Entity
-public class Like {
+public class Likes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,10 +15,10 @@ public class Like {
     @Column (nullable = false)
     protected Long timeline_id;
 
-    public Like(){
+    public Likes(){
     }
 
-    public Like(Long user_id, Long timeline_id) {
+    public Likes(Long user_id, Long timeline_id) {
         this.user_id = user_id;
         this.timeline_id = timeline_id;
     }
