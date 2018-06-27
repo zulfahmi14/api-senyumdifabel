@@ -1,5 +1,6 @@
 package com.example.senyumdifabel.people;
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,10 @@ public class PeopleController {
     @GetMapping("/getuser/{id}")
     public People getuser(@PathVariable(value = "id") Long id){
         return peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+    }
+    @GetMapping("/myGroup/{id}")
+    public List<PrevGroup> myGroup(@PathVariable(value = "id") Long id){
+        return peopleRepository.findMyGroup(id);
     }
 
     @PutMapping("/update/{id}")

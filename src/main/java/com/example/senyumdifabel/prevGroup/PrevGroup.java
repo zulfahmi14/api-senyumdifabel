@@ -1,14 +1,19 @@
 package com.example.senyumdifabel.prevGroup;
 import com.example.senyumdifabel.people.People;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 public class PrevGroup {
     @ManyToMany(mappedBy = "myGroup")
-    private Set<People> peoples = new HashSet<>();
+    private List<People> peoples = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +36,7 @@ public class PrevGroup {
     public PrevGroup() {
     }
 
-    public PrevGroup(Set<People> peoples, String group_name, String photo, String date, String time, String prev_chat) {
+    public PrevGroup(List<People> peoples, String group_name, String photo, String date, String time, String prev_chat) {
         this.peoples = peoples;
         this.group_name = group_name;
         this.photo = photo;
@@ -40,11 +45,12 @@ public class PrevGroup {
         this.prev_chat = prev_chat;
     }
 
-    public Set<People> getPeoples() {
+    @JsonBackReference
+    public List<People> getPeoples() {
         return peoples;
     }
 
-    public void setPeoples(Set<People> peoples) {
+    public void setPeoples(List<People> peoples) {
         this.peoples = peoples;
     }
 

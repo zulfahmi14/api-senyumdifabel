@@ -1,8 +1,10 @@
 package com.example.senyumdifabel.prevGroup;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.people.People;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class PrevGroupController {
@@ -17,5 +19,8 @@ public class PrevGroupController {
         return prevGroupRepository.save(prevGroup);
     }
 
-
+    @GetMapping("/groupMember/{id}")
+    public List<People> myGroup(@PathVariable(value = "id") Long id){
+        return prevGroupRepository.findMember(id);
+    }
 }

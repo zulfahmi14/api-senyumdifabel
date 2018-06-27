@@ -18,8 +18,8 @@ public class UserGroupController {
         return userGroupRepository.save(userGroup);
     }
 
-    @GetMapping("/myGroup/{id}")
-    public List<UserGroup> myGroup(@PathVariable(value = "id") Long id){
-        return userGroupRepository.findMyGroup(id) ;
-    }
+//    @GetMapping("/myGroup/{id}")
+//    public List<UserGroup> myGroup(@PathVariable(value = "id") Long id){
+//        return userGroupRepository.findMyGroup(id) ;
+//    }
 }
