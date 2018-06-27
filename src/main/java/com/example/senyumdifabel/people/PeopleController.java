@@ -21,6 +21,11 @@ public class PeopleController {
         return peopleRepository.save(people);
     }
 
+    @PostMapping("/login")
+    public People login(@RequestBody People people){
+        return peopleRepository.login(people.getUser_name() , people.getUser_name()) ;
+    }
+
     @GetMapping("/getusers")
     public List<People> show(){
         return peopleRepository.findAll();
@@ -30,6 +35,7 @@ public class PeopleController {
     public People getuser(@PathVariable(value = "id") Long id){
         return peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
     }
+
     @GetMapping("/myGroup/{id}")
     public List<PrevGroup> myGroup(@PathVariable(value = "id") Long id){
         return peopleRepository.findMyGroup(id);
@@ -66,4 +72,5 @@ public class PeopleController {
         peopleRepository.delete(people);
         return true;
     }
+
 }

@@ -5,7 +5,6 @@ import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.skill.Skill;
 import com.example.senyumdifabel.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -37,7 +36,7 @@ public class People extends User {
     @JoinColumn(name = "user_id")
     protected List<Skill> skills = new ArrayList<>();
 
-//    @Column(nullable = false)
+    @Column(nullable = false)
     protected String cv;
 
     public People() {
@@ -60,7 +59,7 @@ public class People extends User {
         this.cv = cv;
     }
 
-    @JsonManagedReference
+//    @JsonManagedReference
     public List<PrevGroup> getMyGroup() {
         return myGroup;
     }
