@@ -4,6 +4,8 @@ import com.example.senyumdifabel.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PrevCHatController {
     private PrevChatRepository prevChatRepository ;
@@ -17,12 +19,12 @@ public class PrevCHatController {
     }
 
     @GetMapping("/listChat/{id}")
-    public PrevChat listChat(@PathVariable(value ="id") Long x){
+    public List<PrevChat> listChat(@PathVariable(value ="id") Long x){
         return prevChatRepository.findMyChat(x);
     }
 
-    @DeleteMapping("/deleteChat/{id}")
-    public boolean deleteChat(@PathVariable(value = "id") Long id){
+    @DeleteMapping("/deleteChatPrev/{id}")
+    public boolean deleteChatPrev(@PathVariable(value = "id") Long id){
         PrevChat prevchat = prevChatRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         prevChatRepository.delete(prevchat);
 //        hapus chatnya juga . . .

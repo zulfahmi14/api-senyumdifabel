@@ -15,7 +15,7 @@ public class Company extends User {
     protected String description ;
 
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "company_id")
     protected Set<Job> jobs = new HashSet<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
@@ -44,7 +44,7 @@ public class Company extends User {
         this.description = description;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Set<Job> getJobs() {
         return jobs;
     }
@@ -53,7 +53,7 @@ public class Company extends User {
         this.jobs = jobs;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Set<Proposal> getProposals() {
         return proposals;
     }

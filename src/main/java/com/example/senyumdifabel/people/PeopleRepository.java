@@ -12,6 +12,6 @@ public interface PeopleRepository extends JpaRepository< People, Long> {
     @Query("select myGroup from People p where p.user_id = ?1")
     List<PrevGroup> findMyGroup(Long user_id);
 
-    @Query("select u from People u where u.user_name = ?1 and u.user_password = ?2")
-    People login(String name, String password);
+    @Query("select u from People u where u.user_email = :email and u.user_password = :password")
+    People login(String email, String password);
 }

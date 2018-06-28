@@ -3,6 +3,7 @@ import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +20,6 @@ public class PeopleController {
     @PostMapping("/register")
     public People register(@RequestBody People people){
         return peopleRepository.save(people);
-    }
-
-    @PostMapping("/login")
-    public People login(@RequestBody People people){
-        return peopleRepository.login(people.getUser_name() , people.getUser_name()) ;
     }
 
     @GetMapping("/getusers")
@@ -72,5 +68,4 @@ public class PeopleController {
         peopleRepository.delete(people);
         return true;
     }
-
 }

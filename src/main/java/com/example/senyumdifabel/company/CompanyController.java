@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.company;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class CompanyController {
     private CompanyRepository companyRepository ;
 
+    @Autowired
     public CompanyController(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }

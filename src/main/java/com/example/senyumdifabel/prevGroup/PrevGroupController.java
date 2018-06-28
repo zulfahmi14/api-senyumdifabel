@@ -23,4 +23,5 @@ public class PrevGroupController {
     public List<People> myGroup(@PathVariable(value = "id") Long id){
         return prevGroupRepository.findMember(id);
     }
+
 }

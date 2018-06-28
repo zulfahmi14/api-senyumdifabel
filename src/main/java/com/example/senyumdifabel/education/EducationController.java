@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.education;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class EducationController {
     private EducationRepository educationRepository ;
 
+    @Autowired
     public EducationController(EducationRepository educationRepository) {
         this.educationRepository = educationRepository;
     }

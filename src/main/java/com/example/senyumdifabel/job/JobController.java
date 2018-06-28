@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.job;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class JobController {
     private JobRepository jobRepository ;
 
+    @Autowired
     public JobController(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }
@@ -16,6 +18,11 @@ public class JobController {
     @PostMapping("/addJob")
     public Job addJob(@RequestBody Job edu){
         return jobRepository.save(edu);
+    }
+
+    @GetMapping("/getjobs")
+    public List<Job> show(){
+        return jobRepository.findAll();
     }
 
     @GetMapping("/getJob/{id}")

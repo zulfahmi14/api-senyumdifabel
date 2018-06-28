@@ -2,7 +2,9 @@ package com.example.senyumdifabel.people;
 import com.example.senyumdifabel.education.Education;
 import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
+import com.example.senyumdifabel.proposal.Proposal;
 import com.example.senyumdifabel.skill.Skill;
+import com.example.senyumdifabel.timeline.Timeline;
 import com.example.senyumdifabel.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,6 +35,14 @@ public class People extends User {
     protected List<Experience> experiences = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "people_id")
+    protected List<Proposal> proposals = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "people_id")
+    protected List<Timeline> timelines = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     protected List<Skill> skills = new ArrayList<>();
 
@@ -42,13 +52,31 @@ public class People extends User {
     public People() {
     }
 
-    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, List<PrevGroup> myGroup, List<Education> educations, List<Experience> experiences, List<Skill> skills, String cv) {
+    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, List<PrevGroup> myGroup, List<Education> educations, List<Experience> experiences, List<Proposal> proposals, List<Timeline> timelines, List<Skill> skills, String cv) {
         super(user_name, user_email, user_password, user_address, user_photo, user_contact);
         this.myGroup = myGroup;
         this.educations = educations;
         this.experiences = experiences;
+        this.proposals = proposals;
+        this.timelines = timelines;
         this.skills = skills;
         this.cv = cv;
+    }
+
+    public List<Timeline> getTimelines() {
+        return timelines;
+    }
+
+    public void setTimelines(List<Timeline> timelines) {
+        this.timelines = timelines;
+    }
+
+    public List<Proposal> getProposals() {
+        return proposals;
+    }
+
+    public void setProposals(List<Proposal> proposals) {
+        this.proposals = proposals;
     }
 
     public String getCv() {

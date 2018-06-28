@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.experience;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class ExperienceController {
     private ExperienceRepository experienceRepository ;
 
+    @Autowired
     public ExperienceController(ExperienceRepository experienceRepository) {
         this.experienceRepository = experienceRepository;
     }
