@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface FollowingRepository extends JpaRepository<Following, Long> {
-    @Query("select u from Following u where u.user_id = ?1")
-    List<Following> findFol(Long user_id);
+    @Query("select u from Following u where u.id = ?1")
+    List<Following> findFollowing(Long id);
 }
