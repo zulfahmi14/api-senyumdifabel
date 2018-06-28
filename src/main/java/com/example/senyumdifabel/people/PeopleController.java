@@ -1,25 +1,35 @@
 package com.example.senyumdifabel.people;
 import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
+import com.example.senyumdifabel.user.Authorities;
+import com.example.senyumdifabel.user.AuthoritiesRepository;
 import com.example.senyumdifabel.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.undo.AbstractUndoableEdit;
 import java.util.List;
 
 @RestController
 public class PeopleController {
     private PeopleRepository peopleRepository;
+    private AuthoritiesRepository authoritiesRepository ;
 
     @Autowired
-    public PeopleController(PeopleRepository peopleRepository) {
+    public PeopleController(PeopleRepository peopleRepository, AuthoritiesRepository authoritiesRepository) {
         this.peopleRepository = peopleRepository;
+        this.authoritiesRepository = authoritiesRepository;
     }
 
     @PostMapping("/register")
     public People register(@RequestBody People people){
-        return peopleRepository.save(people);
+        people.setUser_password(new BCryptPasswordEncoder().encode(people.getUser_password()));
+        peopleRepository.save(people);
+        Authorities authorities = new Authorities(people.getUser_email(), people);
+        authoritiesRepository.save(authorities);
+        return people;
     }
 
     @GetMapping("/getusers")

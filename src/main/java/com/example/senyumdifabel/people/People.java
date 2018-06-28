@@ -46,20 +46,14 @@ public class People extends User {
     @JoinColumn(name = "user_id")
     protected List<Skill> skills = new ArrayList<>();
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     protected String cv;
 
     public People() {
     }
 
-    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, List<PrevGroup> myGroup, List<Education> educations, List<Experience> experiences, List<Proposal> proposals, List<Timeline> timelines, List<Skill> skills, String cv) {
+    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, String cv) {
         super(user_name, user_email, user_password, user_address, user_photo, user_contact);
-        this.myGroup = myGroup;
-        this.educations = educations;
-        this.experiences = experiences;
-        this.proposals = proposals;
-        this.timelines = timelines;
-        this.skills = skills;
         this.cv = cv;
     }
 
