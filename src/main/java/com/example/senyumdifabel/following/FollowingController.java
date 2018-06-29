@@ -28,12 +28,12 @@ public class FollowingController {
 
     @GetMapping("/getFollowing/{id}")
     public List<Following> findFollowing(@PathVariable(value = "id") Long id){
-        return followingRepository.findFollowings(id) ;
+        return followingRepository.findFollowing(id) ;
     }
 
     @GetMapping("/getFollower/{id}")
     public List<Following> findFollower(@PathVariable(value = "id") Long id){
-        return followingRepository.findFollowers(id) ;
+        return followingRepository.findFollower(id) ;
     }
 
     @PutMapping("/updateFollowing/{id}")

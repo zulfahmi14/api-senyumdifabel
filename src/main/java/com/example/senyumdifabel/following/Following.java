@@ -6,10 +6,10 @@ import javax.persistence.*;
 public class Following {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long Id;
+    public Long Id;
 
     @Column(nullable = false)
-    protected String user_id ;
+    public String user_id ;
 
     @Column(nullable = false)
     protected String follow ;

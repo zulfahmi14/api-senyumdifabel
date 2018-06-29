@@ -40,7 +40,7 @@ public class People extends User {
     protected List<Proposal> proposals = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "people_id")
+    @JoinColumn(name = "user_id")
     protected List<Timeline> timelines = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.ALL})

@@ -15,7 +15,7 @@ public class Timeline {
     protected Long timeline_id;
 
     @Column(nullable = false)
-    protected Long people_id;
+    protected Long user_id;
     @Column(nullable = false)
     protected String timeline_description;
     @Column(nullable = false)
@@ -38,22 +38,22 @@ public class Timeline {
 
     }
 
-    public Timeline(Long people_id, String timeline_description, String timeline_date, String timeline_time) {
-        this.people_id = people_id;
+    public Timeline(Long user_id, String timeline_description, String timeline_date, String timeline_time, String timeline_photo) {
+        this.user_id = user_id;
         this.timeline_description = timeline_description;
         this.timeline_date = timeline_date;
         this.timeline_time = timeline_time;
+        this.timeline_photo = timeline_photo;
     }
 
-//    Getter
+    //    Getter
     public Long getTimeline_id() {
         return timeline_id;
     }
 
 
-
-    public Long getPeople_id() {
-        return people_id;
+    public Long getUser_id() {
+        return user_id;
     }
 
     public String getTimeline_description() {
@@ -74,8 +74,8 @@ public class Timeline {
         this.timeline_id = timeline_id;
     }
 
-    public void setPeople_id(Long people_id) {
-        this.people_id = people_id;
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 
     public void setTimeline_description(String timeline_description) {
@@ -88,5 +88,29 @@ public class Timeline {
 
     public void setTimeline_time(String timeline_time) {
         this.timeline_time = timeline_time;
+    }
+
+    public String getTimeline_photo() {
+        return timeline_photo;
+    }
+
+    public void setTimeline_photo(String timeline_photo) {
+        this.timeline_photo = timeline_photo;
+    }
+
+    public List<Likes> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Likes> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(List<Comment> comment) {
+        this.comment = comment;
     }
 }
