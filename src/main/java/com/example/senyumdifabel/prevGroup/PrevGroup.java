@@ -23,9 +23,6 @@ public class PrevGroup {
     protected String group_name ;
 
     @Column (nullable = false)
-    protected  String photo ;
-
-    @Column (nullable = false)
     protected  String date ;
 
     @Column (nullable = false)
@@ -33,11 +30,21 @@ public class PrevGroup {
 
     protected String prev_chat ;
 
+    protected  String photo ;
+//
+//    @Column (nullable = false)
+//    protected Long user_id ;
+
     public PrevGroup() {
     }
 
-    public PrevGroup(List<People> peoples, String group_name, String photo, String date, String time, String prev_chat) {
-        this.peoples = peoples;
+    public PrevGroup(String group_name, String date, String time) {
+        this.group_name = group_name;
+        this.date = date;
+        this.time = time;
+    }
+
+    public PrevGroup(String group_name, String photo, String date, String time, String prev_chat) {
         this.group_name = group_name;
         this.photo = photo;
         this.date = date;
@@ -102,3 +109,10 @@ public class PrevGroup {
         this.prev_chat = prev_chat;
     }
 }
+
+//        {
+//            "group_name": "",
+//            "date": "",
+//            "time": "",
+//            "photo": ""
+//        }

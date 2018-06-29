@@ -11,13 +11,17 @@ public class UserGroup {
 
     private Long user_id ;
     private Long id_prev ;
+    protected String date ;
+    protected String time ;
 
     public UserGroup() {
     }
 
-    public UserGroup(Long user_id, Long id_prev) {
+    public UserGroup(Long user_id, Long id_prev, String date, String time) {
         this.user_id = user_id;
         this.id_prev = id_prev;
+        this.date = date;
+        this.time = time;
     }
 
     public Long getId() {
@@ -42,5 +46,21 @@ public class UserGroup {
 
     public void setId_prev(Long id_prev) {
         this.id_prev = id_prev;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

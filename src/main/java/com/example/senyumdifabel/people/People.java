@@ -7,6 +7,7 @@ import com.example.senyumdifabel.skill.Skill;
 import com.example.senyumdifabel.timeline.Timeline;
 import com.example.senyumdifabel.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -57,6 +58,7 @@ public class People extends User {
         this.cv = cv;
     }
 
+    @JsonIgnore
     public List<Timeline> getTimelines() {
         return timelines;
     }
@@ -65,6 +67,7 @@ public class People extends User {
         this.timelines = timelines;
     }
 
+    @JsonIgnore
     public List<Proposal> getProposals() {
         return proposals;
     }
@@ -81,7 +84,7 @@ public class People extends User {
         this.cv = cv;
     }
 
-//    @JsonManagedReference
+    @JsonIgnore
     public List<PrevGroup> getMyGroup() {
         return myGroup;
     }
@@ -90,6 +93,7 @@ public class People extends User {
         this.myGroup = myGroup;
     }
 
+    @JsonIgnore
     public List<Education> getEducations() {
         return educations;
     }
@@ -98,6 +102,7 @@ public class People extends User {
         this.educations = educations;
     }
 
+    @JsonIgnore
     public List<Experience> getExperiences() {
         return experiences;
     }
@@ -106,6 +111,7 @@ public class People extends User {
         this.experiences = experiences;
     }
 
+    @JsonIgnore
     public List<Skill> getSkills() {
         return skills;
     }
@@ -113,4 +119,6 @@ public class People extends User {
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
+
+
 }

@@ -18,8 +18,23 @@ public class UserGroupController {
         return userGroupRepository.save(userGroup);
     }
 
+    @DeleteMapping("/leaveGroup/{id}")
+    public boolean deleteuser(@PathVariable(value = "id") Long id) {
+        UserGroup people = userGroupRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+        userGroupRepository.delete(people);
+        return true;
+    }
+
 //    @GetMapping("/myGroup/{id}")
 //    public List<UserGroup> myGroup(@PathVariable(value = "id") Long id){
 //        return userGroupRepository.findMyGroup(id) ;
 //    }
 }
+
+// POST
+//{
+//        "id_prev": "1",
+//        "user_id": "1",
+//        "time": "019213",
+//        "date": "131313"
+//}

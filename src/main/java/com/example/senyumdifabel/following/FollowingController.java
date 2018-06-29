@@ -16,26 +16,31 @@ public class FollowingController {
         this.followingRepository = followingRepository;
     }
 
-    @PostMapping("/addFollowing")
+    @PostMapping("/follow")
     public Following addFollow(@RequestBody Following fol){
         return followingRepository.save(fol);
     }
 
-    @GetMapping("/getFollowing")
-    public List<Following> show(){
-        return followingRepository.findAll();
-    }
+//    @GetMapping("/getFollowings")
+//    public List<Following> show(){
+//        return followingRepository.findAll();
+//    }
 
     @GetMapping("/getFollowing/{id}")
     public List<Following> findFollowing(@PathVariable(value = "id") Long id){
-        return followingRepository.findFollowing(id) ;
+        return followingRepository.findFollowings(id) ;
+    }
+
+    @GetMapping("/getFollower/{id}")
+    public List<Following> findFollower(@PathVariable(value = "id") Long id){
+        return followingRepository.findFollowers(id) ;
     }
 
     @PutMapping("/updateFollowing/{id}")
     public Following updateFollowing(@PathVariable(value = "id") Long id, @RequestBody Following peoplenew){
         Following peopleold = followingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
-        peopleold.setUser_id1(peoplenew.getUser_id1());
-        peopleold.setUser_id2(peoplenew.getUser_id2());
+        peopleold.setUser_id(peoplenew.getUser_id());
+        peopleold.setFollow(peoplenew.getFollow());
         return followingRepository.save(peopleold);
     }
 
