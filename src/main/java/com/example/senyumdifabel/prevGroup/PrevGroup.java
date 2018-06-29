@@ -109,10 +109,11 @@ public class PrevGroup {
         this.prev_chat = prev_chat;
     }
 }
-
-//        {
-//            "group_name": "",
-//            "date": "",
-//            "time": "",
-//            "photo": ""
-//        }
+/*
+        {
+            "group_name": "",
+            "date": "",
+            "time": "",
+            "photo": ""
+        }
+*/

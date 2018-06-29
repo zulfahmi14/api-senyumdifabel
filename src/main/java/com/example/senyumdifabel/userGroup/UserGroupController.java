@@ -30,11 +30,3 @@ public class UserGroupController {
 //        return userGroupRepository.findMyGroup(id) ;
 //    }
 }
-
-// POST
-//{
-//        "id_prev": "1",
-//        "user_id": "1",
-//        "time": "019213",
-//        "date": "131313"
-//}
