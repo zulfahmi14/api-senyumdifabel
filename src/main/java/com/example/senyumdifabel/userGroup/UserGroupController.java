@@ -23,13 +23,13 @@ public class UserGroupController {
         Long x1 = x.getParam1() ;
         Long x2 = x.getParam2() ;
         UserGroup leave = userGroupRepository.findByUserGroup(x1,x2);
-        userGroupRepository.delete(leave);
         if(leave == null)
         {
             return false ;
         }
         else
         {
+            userGroupRepository.delete(leave);
             return true ;
         }
 
