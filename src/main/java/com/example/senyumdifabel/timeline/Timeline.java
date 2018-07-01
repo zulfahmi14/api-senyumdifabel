@@ -33,6 +33,8 @@ public class Timeline {
     @JoinColumn(name = "timeline_id")
     private List<Comment> comment = new ArrayList<>();
 
+//    private CommentRepository commentRepository;
+
 //    Constructor
     public Timeline(){
 
@@ -113,4 +115,8 @@ public class Timeline {
     public void setComment(List<Comment> comment) {
         this.comment = comment;
     }
+
+//    public Long countComment(Long timeline_id){
+//        return commentRepository.countCom(timeline_id);
+//    }
 }

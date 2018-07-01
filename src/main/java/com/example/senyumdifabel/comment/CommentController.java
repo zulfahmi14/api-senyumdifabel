@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class CommentController {
     private CommentRepository commentRepository ;
 
@@ -22,6 +23,11 @@ public class CommentController {
     @GetMapping("/getComment/{id}")
     public List<Comment> getComment(@PathVariable(value = "id") Long id){
         return commentRepository.findCom(id) ;
+    }
+
+    @GetMapping("/countComment/{id}")
+    public Long countComment(@PathVariable(value = "id") Long id){
+        return commentRepository.countCom(id) ;
     }
 
     @PutMapping("/updateComment/{id}")

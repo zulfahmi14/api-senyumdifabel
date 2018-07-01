@@ -23,11 +23,11 @@ public class Comment {
     protected String date;
 
     @Column(nullable = false)
-    protected Long comment ;
+    protected String comment ;
 
     public Comment(){}
 
-    public Comment(Long timeline_id, Long user_id, String time, String date, Long comment) {
+    public Comment(Long timeline_id, Long user_id, String time, String date, String comment) {
         this.timeline_id = timeline_id;
         this.user_id = user_id;
         this.time = time;
@@ -75,11 +75,11 @@ public class Comment {
         this.date = date;
     }
 
-    public Long getComment() {
+    public String getComment() {
         return comment;
     }
 
-    public void setComment(Long comment) {
+    public void setComment(String comment) {
         this.comment = comment;
     }
 }
