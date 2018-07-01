@@ -25,7 +25,7 @@ public class ProposalController {
 
     @GetMapping("/getProposalByPeople/{id}")
     public List<Proposal> getProposalByPeople(@PathVariable(value = "id") Long id){
-        return proposalRepository.findByPeople(id) ;
+        return proposalRepository.findByUser(id) ;
     }
 
     @PutMapping("/confirmProposal/{id}")

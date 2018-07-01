@@ -23,9 +23,16 @@ public class People extends User {
             name = "user_group",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = { @JoinColumn(name = "id_prev")}
-
     )
     protected List<PrevGroup> myGroup = new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "proposal",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = { @JoinColumn(name = "job_id")}
+    )
+    protected List<Proposal> proposals = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
@@ -34,10 +41,6 @@ public class People extends User {
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     protected List<Experience> experiences = new ArrayList<>();
-
-    @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "people_id")
-    protected List<Proposal> proposals = new ArrayList<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
@@ -119,6 +122,4 @@ public class People extends User {
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
-
-
 }

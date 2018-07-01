@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface JobRepository extends JpaRepository< Job, Long> {
-    @Query("select u from Job u where u.user_id = ?1")
-    List<Job> findJob(Long user_id);
+//    @Query("select u from Job u where u.user_id = ?1")
+//    List<Job> findJob(Long user_id);
 }

@@ -11,6 +11,6 @@ public interface ProposalRepository extends JpaRepository< Proposal, Long> {
     @Query("select u from Proposal u where u.job_id = ?1")
     List<Proposal> findByCompany(Long company_id);
 
-    @Query("select u from Proposal u where u.people_id = ?1")
-    List<Proposal> findByPeople(Long people_id);
+    @Query("select u from Proposal u where u.user_id = ?1")
+    List<Proposal> findByUser(Long user_id);
 }

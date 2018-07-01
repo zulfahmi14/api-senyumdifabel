@@ -25,10 +25,10 @@ public class JobController {
         return jobRepository.findAll();
     }
 
-    @GetMapping("/getJob/{id}")
-    public List<Job> getEdu(@PathVariable(value = "id") Long id){
-        return jobRepository.findJob(id) ;
-    }
+//    @GetMapping("/getJob/{id}")
+//    public List<Job> getEdu(@PathVariable(value = "id") Long id){
+//        return jobRepository.findJob(id) ;
+//    }
 
     @PutMapping("/updateJob/{id}")
     public Job updatecv(@PathVariable(value = "id") Long id, @RequestBody Job peoplenew){

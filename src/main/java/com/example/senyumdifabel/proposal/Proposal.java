@@ -15,15 +15,15 @@ public class Proposal {
     protected Long job_id ;
 
     @Column(nullable = false)
-    protected Long people_id ;
+    protected Long user_id ;
 
     public Proposal() {
     }
 
-    public Proposal(Long status, Long company_id, Long people_id) {
+    public Proposal(Long status, Long job_id, Long user_id) {
         this.status = status;
-        this.job_id = company_id;
-        this.people_id = people_id;
+        this.job_id = job_id;
+        this.user_id = user_id;
     }
 
     public Long getId() {
@@ -49,12 +49,17 @@ public class Proposal {
     public void setCompany_id(Long company_id) {
         this.job_id = company_id;
     }
-
-    public Long getPeople_id() {
-        return people_id;
-    }
-
-    public void setPeople_id(Long people_id) {
-        this.people_id = people_id;
-    }
 }
+
+/*
+{
+    "user_id": 1,
+    "user_name": "zull",
+    "user_email": "zull@zul",
+    "user_password": "$2a$10$iNxIeYxgmDLv/gkh863KROXl1pr4SS7jO7bLVKClT7M49HlrIgnLu",
+    "user_address": "bogor",
+    "user_photo": "zul.png",
+    "user_contact": "089689910444",
+    "cv": "q"
+}
+ */

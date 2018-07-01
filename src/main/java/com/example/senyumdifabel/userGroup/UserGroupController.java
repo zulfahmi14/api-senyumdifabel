@@ -1,8 +1,8 @@
 package com.example.senyumdifabel.userGroup;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.params.Params;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -18,15 +18,30 @@ public class UserGroupController {
         return userGroupRepository.save(userGroup);
     }
 
-    @DeleteMapping("/leaveGroup/{id}")
-    public boolean deleteuser(@PathVariable(value = "id") Long id) {
-        UserGroup people = userGroupRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
-        userGroupRepository.delete(people);
-        return true;
-    }
+    @PostMapping("/leaveGroup")
+    public boolean deleteuser(@RequestBody Params x) {
+        Long x1 = x.getParam1() ;
+        Long x2 = x.getParam2() ;
+        UserGroup leave = userGroupRepository.findByUserGroup(x1,x2);
+        userGroupRepository.delete(leave);
+        if(leave == null)
+        {
+            return false ;
+        }
+        else
+        {
+            return true ;
+        }
 
-//    @GetMapping("/myGroup/{id}")
-//    public List<UserGroup> myGroup(@PathVariable(value = "id") Long id){
-//        return userGroupRepository.findMyGroup(id) ;
-//    }
+    }
 }
+
+/*
+LEAVE GROUP
+
+{
+	"param1": "1", // user_id
+	"param2": "1"  // id_prev
+}
+
+ */
