@@ -62,6 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
                 .antMatchers( "/**")
                     .hasRole("USER")
+                .antMatchers("/login").permitAll()
+                .antMatchers("/register").permitAll()
 //                .antMatchers(HttpMethod.POST, "/petugas/**")
 //                .hasRole("ADMIN")
 //                .antMatchers(HttpMethod.PUT, "/**")

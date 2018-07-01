@@ -26,10 +26,20 @@ public class PeopleController {
     @PostMapping("/register")
     public People register(@RequestBody People people){
         people.setUser_password(new BCryptPasswordEncoder().encode(people.getUser_password()));
-        peopleRepository.save(people);
-        Authorities authorities = new Authorities(people.getUser_email(), people);
-        authoritiesRepository.save(authorities);
-        return people;
+        List<People> email = peopleRepository.findEmail(people.getUser_email());
+        if( email.size()  < 1 )
+        {
+            peopleRepository.save(people);
+            Authorities authorities = new Authorities(people.getUser_email(), people);
+            authoritiesRepository.save(authorities);
+            return people ;
+        }
+        else
+        {
+            people.setUser_name("email sudah ada");
+            return people ;
+        }
+
     }
 
     @GetMapping("/getusers")
@@ -79,4 +89,13 @@ public class PeopleController {
         return true;
     }
 }
+/*
+{
+    "user_password": "$2a$10$UurEiOTKbq2HPsAVa8bMrusdpF/Xw6PV3r.GLpkgrRNCYISD97UL.",
+    "user_address": null,
+    "user_photo": null,
+    "user_contact": null,
+    "cv": "zull"
+}
+ */
 
