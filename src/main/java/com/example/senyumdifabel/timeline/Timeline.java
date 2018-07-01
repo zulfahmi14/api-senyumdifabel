@@ -3,6 +3,7 @@ package com.example.senyumdifabel.timeline;
 
 import com.example.senyumdifabel.comment.Comment;
 import com.example.senyumdifabel.likes.Likes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Timeline {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "timeline_id")
+//    private Comment comment;
     private List<Comment> comment = new ArrayList<>();
 
 //    private CommentRepository commentRepository;
@@ -100,6 +102,7 @@ public class Timeline {
         this.timeline_photo = timeline_photo;
     }
 
+    @JsonIgnore
     public List<Likes> getLikes() {
         return likes;
     }
@@ -108,6 +111,7 @@ public class Timeline {
         this.likes = likes;
     }
 
+    @JsonIgnore
     public List<Comment> getComment() {
         return comment;
     }
@@ -115,6 +119,7 @@ public class Timeline {
     public void setComment(List<Comment> comment) {
         this.comment = comment;
     }
+
 
 //    public Long countComment(Long timeline_id){
 //        return commentRepository.countCom(timeline_id);

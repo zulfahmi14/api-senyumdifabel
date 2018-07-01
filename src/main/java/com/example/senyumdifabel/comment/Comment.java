@@ -25,6 +25,10 @@ public class Comment {
     @Column(nullable = false)
     protected String comment ;
 
+//    @OneToOne
+//    @JoinColumn(name = "user_id")
+//    protected People people;
+
     public Comment(){}
 
     public Comment(Long timeline_id, Long user_id, String time, String date, String comment) {
@@ -82,4 +86,16 @@ public class Comment {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+//    public People getPeople() {
+//        return people;
+//    }
+//
+//    public String getPeoplename() {
+//        return people.getUser_name();
+//    }
+//    public String getPeoplephoto() {
+//        return people.getUser_photo();
+//    }
+
 }

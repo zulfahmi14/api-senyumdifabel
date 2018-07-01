@@ -4,8 +4,6 @@ import com.example.senyumdifabel.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class CommentController {
     private CommentRepository commentRepository ;
@@ -21,7 +19,7 @@ public class CommentController {
     }
 
     @GetMapping("/getComment/{id}")
-    public List<Comment> getComment(@PathVariable(value = "id") Long id){
+    public Long getComment(@PathVariable(value = "id") Long id){
         return commentRepository.findCom(id) ;
     }
 
