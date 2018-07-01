@@ -29,4 +29,5 @@ public class CommentUser extends Comment {
     public void setUser_photo(String user_photo) {
         this.user_photo = user_photo;
     }
+
 }

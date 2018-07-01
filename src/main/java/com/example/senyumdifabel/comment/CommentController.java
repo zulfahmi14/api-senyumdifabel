@@ -1,8 +1,12 @@
 package com.example.senyumdifabel.comment;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.params.CommentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class CommentController {
@@ -18,9 +22,31 @@ public class CommentController {
         return commentRepository.save(com);
     }
 
-    @GetMapping("/getComment/{id}")
-    public Long getComment(@PathVariable(value = "id") Long id){
-        return commentRepository.findCom(id) ;
+//    @GetMapping("/getComment/{id}")
+//    public Long getComment(@PathVariable(value = "id") Long id){
+//        return commentRepository.findCom(id) ;
+//    }
+
+    @GetMapping("/getComments/{id}")
+    public List<CommentUser> getComment(@PathVariable(value = "id") Long id)
+    {
+        List<CommentUser> send = new ArrayList<CommentUser>();
+        List<Comment> c = commentRepository.findComment(id);
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getUser_id();
+            CommentUser temp = new CommentUser() ;
+            temp.setUser_name(commentRepository.findUserName(idx));
+            temp.setUser_photo(commentRepository.findUserPhoto(idx));
+            temp.setTimeline_id(c.get(i).getTimeline_id());
+            temp.setTime(c.get(i).getTime());
+            temp.setComment(c.get(i).getComment());
+            temp.setDate(c.get(i).getDate());
+            temp.setUser_id(c.get(i).getUser_id());
+            temp.setId(c.get(i).getId());
+            send.add(temp);
+        }
+        return send ;
     }
 
     @GetMapping("/countComment/{id}")

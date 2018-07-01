@@ -12,8 +12,6 @@ import java.util.List;
 public class TimelineController {
     private TimelineRepository timelineRepository;
 
-
-
     @Autowired
     public TimelineController(TimelineRepository timelineRepository) {
         this.timelineRepository = timelineRepository;
@@ -69,6 +67,4 @@ public class TimelineController {
         timelineRepository.delete(timeline);
         return true;
     }
-
-
 }

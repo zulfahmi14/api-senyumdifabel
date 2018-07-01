@@ -42,6 +42,18 @@ public class FileController {
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
+    @PostMapping("/uploadTimeline")
+    public UploadFileResponse uploadTimeline(@RequestParam("file") MultipartFile file) {
+        String fileName = fileStorageService.storeTimeline(file);
+
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/timeline")
+                .path(fileName)
+                .toUriString();
+
+        return new UploadFileResponse(fileName, fileDownloadUri,
+                file.getContentType(), file.getSize());
+    }
 
     @PostMapping("/uploadMultipleFiles")
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {

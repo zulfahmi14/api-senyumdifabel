@@ -51,6 +51,20 @@ public class FileStorageService {
         }
     }
 
+    public String storeTimeline(MultipartFile file) {
+        // Normalize file name
+        String fileName = "Timeline_"+StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            return fileName;
+        } catch (IOException ex) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+
     public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
