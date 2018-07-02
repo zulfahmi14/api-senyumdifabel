@@ -1,9 +1,9 @@
-package com.example.senyumdifabel.following;
+package com.example.senyumdifabel.follower;
 
 import javax.persistence.*;
 
 @Entity
-public class Following {
+public class Follower {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long Id;
@@ -12,13 +12,13 @@ public class Following {
     public Long user_id ;
 
     @Column(nullable = false)
-    protected String follow ;
+    protected Long follower ;
 
-    public Following(){}
+    public Follower(){}
 
-    public Following(Long user_id, String follow) {
+    public Follower(Long user_id, Long follower) {
         this.user_id = user_id;
-        this.follow = follow;
+        this.follower = follower;
     }
 
     public Long getId() {
@@ -37,11 +37,11 @@ public class Following {
         this.user_id = user_id;
     }
 
-    public String getFollow() {
-        return follow;
+    public Long getFollower() {
+        return follower;
     }
 
-    public void setFollow(String follow) {
-        this.follow = follow;
+    public void setFollower(Long follower) {
+        this.follower = follower;
     }
 }
