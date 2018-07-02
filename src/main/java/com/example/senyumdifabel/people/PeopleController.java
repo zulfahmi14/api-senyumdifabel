@@ -1,15 +1,13 @@
 package com.example.senyumdifabel.people;
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.params.CountFollow;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.user.Authorities;
 import com.example.senyumdifabel.user.AuthoritiesRepository;
-import com.example.senyumdifabel.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.undo.AbstractUndoableEdit;
 import java.util.List;
 
 @RestController
@@ -88,6 +86,45 @@ public class PeopleController {
         peopleRepository.delete(people);
         return true;
     }
+
+    //count profile
+    @GetMapping("/countFollow/{id}")
+    public CountFollow countFollow(@PathVariable(value = "id") Long id){
+        Long countFollowing = peopleRepository.findConFollowing(id);
+        Long countFollower = peopleRepository.findConFollower(id); 
+
+        CountFollow cot = new CountFollow();
+        cot.setFollower(countFollower);
+        cot.setFollowing(countFollowing);
+        return cot;
+    }
+
+    //buat page profile, pake gabungan beberapa API ajaa
+//    @GetMapping("/Profile/{id}")
+//    public ProfileUser profile(@PathVariable(value = "id") Long id){
+//        ProfileUser p = peopleRepository.findProfile(id);
+//
+//        List<Experience> ex = peopleRepository.findExperience(id);
+//        for (int i = 0; i<ex.size(); i++){
+//           p.setExperiences();
+//        }
+//         p.setExperiences(ex);
+//
+//        List<Education> ed = peopleRepository.findEducation(id);
+//        p.setEducations(ed);
+//
+//        List<Skill> sk = peopleRepository.findSkill(id);
+//        p.setSkills(sk);
+//
+//        List<Achievement> ac = peopleRepository.findAchievement(id);
+//        p.setAchievements(ac);
+//
+//        List<Contact> co = peopleRepository.findContact(id);
+//        p.setContacts(co);
+
+//        return p;
+//    }
+
 }
 /*
 {

@@ -1,4 +1,6 @@
 package com.example.senyumdifabel.people;
+import com.example.senyumdifabel.achievement.Achievement;
+import com.example.senyumdifabel.contact.Contact;
 import com.example.senyumdifabel.education.Education;
 import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
@@ -6,15 +8,11 @@ import com.example.senyumdifabel.proposal.Proposal;
 import com.example.senyumdifabel.skill.Skill;
 import com.example.senyumdifabel.timeline.Timeline;
 import com.example.senyumdifabel.user.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class People extends User {
@@ -49,6 +47,14 @@ public class People extends User {
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     protected List<Skill> skills = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    protected List<Achievement> achievements = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    protected List<Contact> contacts = new ArrayList<>();
 
 //    @Column(nullable = false)
     protected String cv;
@@ -121,5 +127,23 @@ public class People extends User {
 
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
+    }
+
+    @JsonIgnore
+    public List<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(List<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
+    @JsonIgnore
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 }

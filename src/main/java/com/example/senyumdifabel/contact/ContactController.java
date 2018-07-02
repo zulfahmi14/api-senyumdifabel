@@ -34,7 +34,7 @@ public class ContactController {
         return contactRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteAchievement/{id}")
+    @DeleteMapping("/deleteContact/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Contact people = contactRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         contactRepository.delete(people);

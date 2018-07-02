@@ -16,7 +16,7 @@ public class FollowingController {
         this.followingRepository = followingRepository;
     }
 
-    @PostMapping("/follow")
+    @PostMapping("/following")
     public Following addFollow(@RequestBody Following fol){
         return followingRepository.save(fol);
     }
@@ -31,10 +31,10 @@ public class FollowingController {
         return followingRepository.findFollowing(id) ;
     }
 
-    @GetMapping("/getFollower/{id}")
-    public List<Following> findFollower(@PathVariable(value = "id") Long id){
-        return followingRepository.findFollower(id) ;
-    }
+//    @GetMapping("/getFollower/{id}")
+//    public List<Following> findFollower(@PathVariable(value = "id") Long id){
+//        return followingRepository.findFollower(id) ;
+//    }
 
     @PutMapping("/updateFollowing/{id}")
     public Following updateFollowing(@PathVariable(value = "id") Long id, @RequestBody Following peoplenew){

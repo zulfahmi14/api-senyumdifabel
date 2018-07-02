@@ -12,11 +12,11 @@ public class Following {
     public Long user_id ;
 
     @Column(nullable = false)
-    protected String follow ;
+    protected Long follow ;
 
     public Following(){}
 
-    public Following(Long user_id, String follow) {
+    public Following(Long user_id, Long follow) {
         this.user_id = user_id;
         this.follow = follow;
     }
@@ -37,11 +37,11 @@ public class Following {
         this.user_id = user_id;
     }
 
-    public String getFollow() {
+    public Long getFollow() {
         return follow;
     }
 
-    public void setFollow(String follow) {
+    public void setFollow(Long follow) {
         this.follow = follow;
     }
 }
