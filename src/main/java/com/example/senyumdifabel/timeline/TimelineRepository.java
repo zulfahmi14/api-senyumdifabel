@@ -15,7 +15,7 @@ public interface TimelineRepository  extends JpaRepository<Timeline,Long>  {
     List<Timeline> findTimeline(long user_id);
 
     @Query("select u from Following u where u.user_id = ?1")
-    List<Following> findFollowing(Long id);
+    List<Following> findFollowing(long id);
 
     @Query("select user_name from People u where u.user_id = ?1")
     String FindUserName(Long y);

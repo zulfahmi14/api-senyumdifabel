@@ -42,13 +42,19 @@ public class TimelineController {
 
     @GetMapping("/getFollowingTimeline/{id}")
     public List<TimelineUser> getFollowingTimeline(@PathVariable(value = "id") Long id){
-        List<Following> Follow ;
-        List<TimelineUser> timelines= new ArrayList<TimelineUser>();
-        Follow =  timelineRepository.findFollowing(id) ;
-        for(int i = 0 ; i < Follow.size() ;i++)
+        List<Following> Follow  = timelineRepository.findFollowing(id) ;
+        List<TimelineUser> timelines= new ArrayList<>();
+        for(int i = 0 ; i <= Follow.size() ;i++)
         {
-            String x = Follow.get(i).getUser_id();
-            Long y = Long.parseLong(x);
+            Long y ;
+            if(i<Follow.size())
+            {
+                y = Follow.get(i).getUser_id();
+            }
+            else
+            {
+                y = id ;
+            }
             List<Timeline> temp ;
             temp = timelineRepository.findTimeline(y);
             String name = timelineRepository.FindUserName(y);

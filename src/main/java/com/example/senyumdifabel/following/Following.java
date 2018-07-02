@@ -9,14 +9,14 @@ public class Following {
     public Long Id;
 
     @Column(nullable = false)
-    public String user_id ;
+    public Long user_id ;
 
     @Column(nullable = false)
     protected String follow ;
 
     public Following(){}
 
-    public Following(String user_id, String follow) {
+    public Following(Long user_id, String follow) {
         this.user_id = user_id;
         this.follow = follow;
     }
@@ -29,11 +29,11 @@ public class Following {
         Id = id;
     }
 
-    public String getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 
