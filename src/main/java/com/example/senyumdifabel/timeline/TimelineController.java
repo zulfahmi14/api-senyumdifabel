@@ -2,10 +2,13 @@ package com.example.senyumdifabel.timeline;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.following.Following;
+import com.example.senyumdifabel.params.TimelineUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -38,26 +41,38 @@ public class TimelineController {
     }
 
     @GetMapping("/getFollowingTimeline/{id}")
-    public List<Timeline> getFollowingTimeline(@PathVariable(value = "id") Long id){
+    public List<TimelineUser> getFollowingTimeline(@PathVariable(value = "id") Long id){
         List<Following> Follow ;
-        List<Timeline> timelines= new ArrayList<Timeline>();
+        List<TimelineUser> timelines= new ArrayList<TimelineUser>();
         Follow =  timelineRepository.findFollowing(id) ;
         for(int i = 0 ; i < Follow.size() ;i++)
         {
             String x = Follow.get(i).getUser_id();
             Long y = Long.parseLong(x);
             List<Timeline> temp ;
-            if(i == 0)
+            temp = timelineRepository.findTimeline(y);
+            String name = timelineRepository.FindUserName(y);
+            String photo = timelineRepository.FindPhoto(y);
+
+            for(int j=0 ;j< temp.size() ; j++)
             {
-                timelines = timelineRepository.findTimeline(y);
-            }
-            else
-            {
-                temp = timelineRepository.findTimeline(y);
-                timelines.addAll(temp) ;
+                TimelineUser timeline = new TimelineUser() ;
+
+                timeline.setComments(timelineRepository.FindCountComment(temp.get(j).getTimeline_id()));
+                timeline.setLike(timelineRepository.FindCountLike(temp.get(j).getTimeline_id()));
+                timeline.setUser_name(name);
+                timeline.setUser_photo(photo);
+                timeline.setTimeline_date(temp.get(j).getTimeline_date());
+                timeline.setTimeline_time(temp.get(j).getTimeline_time());
+                timeline.setTimeline_photo(temp.get(j).getTimeline_photo());
+                timeline.setTimeline_description(temp.get(j).getTimeline_description());
+                timeline.setTimeline_id(temp.get(j).getTimeline_id());
+                timeline.setUser_id(y);
+
+                timelines.add(timeline);
             }
         }
-        // sortingnya belum..
+        Collections.sort( timelines , TimelineUser.COMPARE_BY_ID );
         return timelines;
     }
 
