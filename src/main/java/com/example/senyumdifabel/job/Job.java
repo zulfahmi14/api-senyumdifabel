@@ -16,6 +16,9 @@ public class Job {
     protected Long job_id;
 
     @Column(nullable = false)
+    protected String name ;
+
+    @Column(nullable = false)
     protected String description ;
 
     @Column(nullable = false)
@@ -24,13 +27,26 @@ public class Job {
     @Column(nullable = false)
     protected String time ;
 
+    @Column(nullable = false)
+    protected String company_id ;
+
     public Job() {
     }
 
-    public Job(String description, String date, String time) {
+    public Job(String name, String description, String date, String time, String company_id) {
+        this.name = name;
         this.description = description;
         this.date = date;
         this.time = time;
+        this.company_id = company_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<People> getPeoples() {
@@ -71,5 +87,13 @@ public class Job {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
     }
 }

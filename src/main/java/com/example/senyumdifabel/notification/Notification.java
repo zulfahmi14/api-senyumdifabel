@@ -12,11 +12,10 @@ public class Notification {
     @Column(nullable = false)
     protected Long user_id ;
 
-    @Column(nullable = false)
     protected Long type ;
 
     @Column(nullable = false)
-    protected Boolean enable ;
+    protected Boolean enable ; // false = belum dilihat, true = sudah dilihat
 
     @Column(nullable = false)
     protected Long data_id ;
