@@ -36,8 +36,31 @@ public class TimelineController {
     }
 
     @GetMapping("/getMyTimeline/{id}")
-    public List<Timeline> getMyTimeline(@PathVariable(value = "id") Long id){
-        return timelineRepository.findTimeline(id);
+    public List<TimelineUser> getMyTimeline(@PathVariable(value = "id") Long id){
+        List<TimelineUser> x = new ArrayList<>();
+        List<Timeline> temp ;
+        temp = timelineRepository.findTimeline(id);
+        String name = timelineRepository.FindUserName(id);
+        String photo = timelineRepository.FindPhoto(id);
+        for(int j=0 ;j< temp.size() ; j++)
+        {
+            TimelineUser timeline = new TimelineUser() ;
+
+            timeline.setComments(timelineRepository.FindCountComment(temp.get(j).getTimeline_id()));
+            timeline.setLike(timelineRepository.FindCountLike(temp.get(j).getTimeline_id()));
+            timeline.setUser_name(name);
+            timeline.setUser_photo(photo);
+            timeline.setTimeline_date(temp.get(j).getTimeline_date());
+            timeline.setTimeline_time(temp.get(j).getTimeline_time());
+            timeline.setTimeline_photo(temp.get(j).getTimeline_photo());
+            timeline.setTimeline_description(temp.get(j).getTimeline_description());
+            timeline.setTimeline_id(temp.get(j).getTimeline_id());
+            timeline.setUser_id(id);
+
+            x.add(timeline);
+        }
+
+        return x;
     }
 
     @GetMapping("/getFollowingTimeline/{id}")
