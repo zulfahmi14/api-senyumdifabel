@@ -31,6 +31,8 @@ public class PrevGroup {
     protected String prev_chat ;
 
     protected  String photo ;
+
+    protected Boolean read ;
 //
 //    @Column (nullable = false)
 //    protected Long user_id ;
@@ -38,18 +40,29 @@ public class PrevGroup {
     public PrevGroup() {
     }
 
-    public PrevGroup(String group_name, String date, String time) {
+    public PrevGroup(String group_name, String date, String time, String prev_chat, String photo, Boolean read) {
         this.group_name = group_name;
-        this.date = date;
-        this.time = time;
-    }
-
-    public PrevGroup(String group_name, String photo, String date, String time, String prev_chat) {
-        this.group_name = group_name;
-        this.photo = photo;
         this.date = date;
         this.time = time;
         this.prev_chat = prev_chat;
+        this.photo = photo;
+        this.read = read;
+    }
+
+    public Long getId_prev() {
+        return id_prev;
+    }
+
+    public void setId_prev(Long id_prev) {
+        this.id_prev = id_prev;
+    }
+
+    public Boolean getRead() {
+        return read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
     }
 
     @JsonBackReference

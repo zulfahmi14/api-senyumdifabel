@@ -1,6 +1,8 @@
 package com.example.senyumdifabel.group;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.prevGroup.PrevGroup;
+import com.example.senyumdifabel.prevGroup.PrevGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,7 @@ import java.util.List;
 @RestController
 public class GroupController {
     private GroupRepository groupRepository;
+    private PrevGroupRepository prevGroupRepository ;
 
     @Autowired
     public GroupController(GroupRepository groupRepository){this.groupRepository = groupRepository;}
