@@ -1,11 +1,13 @@
 package com.example.senyumdifabel.likes;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.params.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class LikesController {
     private LikesRepository likesRepository;
 
@@ -19,7 +21,20 @@ public class LikesController {
         return likesRepository.save(like);
     }
 
-    @GetMapping("/getLikes/{id}")
+    @PostMapping("/deleteLike")
+    public boolean deleteLike(@RequestBody Params like){
+        Long user_id = like.getParam1() ;
+        Long timeline_id = like.getParam2() ;
+        Likes del = likesRepository.findLikeUser(user_id , timeline_id);
+        if(del == null) return false ;
+        else
+        {
+            likesRepository.delete(del);
+            return true ;
+        }
+    }
+
+    @GetMapping("/getLikes/{id}") // timeline_id
     public List<Likes> getLike(@PathVariable(value = "id") Long id){
         return likesRepository.findLike(id) ;
     }
