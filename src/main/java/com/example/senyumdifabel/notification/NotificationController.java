@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.notification;
 
 import com.example.senyumdifabel.params.getNotification;
+import com.example.senyumdifabel.people.People;
 import com.example.senyumdifabel.proposal.Proposal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +42,13 @@ public class NotificationController {
         return notificationRepository.save(notification);
     }
 
-    @GetMapping("/getuser/{id}")
-    public List<getNotification> getuser(@PathVariable(value = "id") Long id){
+    @GetMapping("/getCountNotification/{id}")
+    public Long getCountNotif(@PathVariable(value = "id") Long id){
+        return notificationRepository.CountEnable(id);
+    }
+
+    @GetMapping("/getNotification/{id}")
+    public List<getNotification> getnotif(@PathVariable(value = "id") Long id){
         List<getNotification> getnotif = new ArrayList<>() ;
         List<Notification> x = notificationRepository.findbyEnable(id,false);
         for( int i=0 ; i< x.size() ; i++ )
@@ -50,6 +56,10 @@ public class NotificationController {
             // update enable
             x.get(i).setEnable(true);
             notificationRepository.save(x.get(i));
+        }
+        x = notificationRepository.findbyUser(id);
+        for( int i=0 ; i< x.size() ; i++ )
+        {
 
             // variable parent
             getNotification temp = new getNotification() ;
@@ -58,6 +68,7 @@ public class NotificationController {
             temp.setId(x.get(i).getId());
             temp.setType(x.get(i).getType());
             temp.setUser_id(x.get(i).getUser_id());
+            temp.setData_id2(x.get(i).getData_id2());
 
             if(x.get(i).getType() == 1)
             {
@@ -71,18 +82,30 @@ public class NotificationController {
             }
             else if(x.get(i).getType() == 2)
             {
-                
+                People people = notificationRepository.findPeople(x.get(i).getData_id());
+
+                temp.setForward_id(x.get(i).getData_id());
+                temp.setNotif_name(people.getUser_name());
+                temp.setNotif_photo(people.getUser_photo());
             }
             else if(x.get(i).getType() == 3)
             {
+                People people = notificationRepository.findPeople(x.get(i).getData_id());
+
+                temp.setForward_id(x.get(i).getData_id2());
+                temp.setNotif_name(people.getUser_name());
+                temp.setNotif_photo(people.getUser_photo());
 
             }
             else {
+                People people = notificationRepository.findPeople(x.get(i).getData_id());
 
+                temp.setForward_id(x.get(i).getData_id2());
+                temp.setNotif_name(people.getUser_name());
+                temp.setNotif_photo(people.getUser_photo());
             }
+            getnotif.add(temp);
         }
-
-
         return getnotif ;
     }
 }

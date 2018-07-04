@@ -20,8 +20,8 @@ public class getNotification extends Notification {
         this.notif_detail = notif_detail;
     }
 
-    public getNotification(Long user_id, Long type, Boolean enable, Long data_id, Long forward_id, String notif_name, String notif_photo, Long status, String notif_detail) {
-        super(user_id, type, enable, data_id);
+    public getNotification(Long user_id, Long type, Boolean enable, Long data_id, Long data_id2, Long forward_id, String notif_name, String notif_photo, Long status, String notif_detail) {
+        super(user_id, type, enable, data_id, data_id2);
         this.forward_id = forward_id;
         this.notif_name = notif_name;
         this.notif_photo = notif_photo;
