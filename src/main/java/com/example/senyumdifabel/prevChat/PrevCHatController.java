@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -62,6 +63,7 @@ public class PrevCHatController {
             temp.setSize(prevChatRepository.findCountMember(group.get(i).getId_prev()));
             chatgroup.add(temp);
         }
+        Collections.sort( chatgroup , ChatList.COMPARE_BY_ID_CHAT );
         return chatgroup ;
     }
 

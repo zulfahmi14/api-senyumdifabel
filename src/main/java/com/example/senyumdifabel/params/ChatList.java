@@ -1,5 +1,7 @@
 package com.example.senyumdifabel.params;
 
+import java.util.Comparator;
+
 public class ChatList {
     protected Long id_prev ;
     protected String name ;
@@ -87,4 +89,11 @@ public class ChatList {
     public void setSize(Long size) {
         this.size = size;
     }
+
+    public static Comparator<ChatList> COMPARE_BY_ID_CHAT = new Comparator<ChatList>() {
+        @Override
+        public int compare(ChatList chatList, ChatList t1) {
+            return chatList.id_chat.compareTo(t1.id_chat);
+        }
+    };
 }

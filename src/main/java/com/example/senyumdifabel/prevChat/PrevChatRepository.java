@@ -19,7 +19,7 @@ public interface PrevChatRepository  extends JpaRepository<PrevChat,Long> {
     @Query("select u from People u where u.user_id = ?1")
     People findPeople(Long idx);
 
-    @Query("select COUNT (peoples) from PrevGroup u where u.id_prev = ?1")
+    @Query("select COUNT (u.user_id) from UserGroup u where u.id_prev = ?1")
     Long findCountMember(Long id);
 
 }
