@@ -1,9 +1,11 @@
 package com.example.senyumdifabel.following;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.params.NamePhoto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,13 +29,33 @@ public class FollowingController {
     }
 
     @GetMapping("/auth/getFollowing/{id}")
-    public List<Following> findFollowing(@PathVariable(value = "id") Long id){
-        return followingRepository.findFollowing(id) ;
+    public List<NamePhoto> findFollowing(@PathVariable(value = "id") Long id){
+        List<NamePhoto> send = new ArrayList<NamePhoto>();
+        List<Following> c = followingRepository.findFollowing(id);
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getFollow();
+            NamePhoto temp = new NamePhoto() ;
+            temp.setUser_name(followingRepository.findUserName(idx));
+            temp.setUser_photo(followingRepository.findUserPhoto(idx));
+            send.add(temp);
+        }
+        return send;
     }
 
     @GetMapping("/auth/getFollower/{id}")
-    public List<Following> findFollower(@PathVariable(value = "id") Long id){
-        return followingRepository.findFollower(id) ;
+    public List<NamePhoto> findFollower(@PathVariable(value = "id") Long id){
+        List<NamePhoto> send = new ArrayList<NamePhoto>();
+        List<Following> c = followingRepository.findFollower(id);
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getFollow();
+            NamePhoto temp = new NamePhoto() ;
+            temp.setUser_name(followingRepository.findUserName(idx));
+            temp.setUser_photo(followingRepository.findUserPhoto(idx));
+            send.add(temp);
+        }
+        return send;
     }
 
     @PutMapping("/auth/updateFollowing/{id}")
