@@ -12,10 +12,10 @@ public class PrevChat {
     protected Long id ;
 
     @Column(nullable = false)
-    protected String peopleA;
+    protected Long peopleA;
 
     @Column(nullable = false)
-    protected String peopleB;
+    protected Long peopleB;
 
     @Column(nullable = false)
     protected String date;
@@ -25,14 +25,17 @@ public class PrevChat {
 
     protected String prev_chat;
 
+    protected Long id_chat ;
+
     public PrevChat(){}
 
-    public PrevChat(String peopleA, String peopleB, String date, String time, String prev_chat) {
+    public PrevChat(Long peopleA, Long peopleB, String date, String time, String prev_chat, Long id_chat) {
         this.peopleA = peopleA;
         this.peopleB = peopleB;
         this.date = date;
         this.time = time;
         this.prev_chat = prev_chat;
+        this.id_chat = id_chat;
     }
 
     public Long getId() {
@@ -43,19 +46,19 @@ public class PrevChat {
         this.id = id;
     }
 
-    public String getPeopleA() {
+    public Long getPeopleA() {
         return peopleA;
     }
 
-    public void setPeopleA(String peopleA) {
+    public void setPeopleA(Long peopleA) {
         this.peopleA = peopleA;
     }
 
-    public String getPeopleB() {
+    public Long getPeopleB() {
         return peopleB;
     }
 
-    public void setPeopleB(String peopleB) {
+    public void setPeopleB(Long peopleB) {
         this.peopleB = peopleB;
     }
 
