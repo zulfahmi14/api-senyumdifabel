@@ -1,12 +1,11 @@
 package com.example.senyumdifabel.user;
 
-import com.example.senyumdifabel.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
     private UserRepository userRepository;
 

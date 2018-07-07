@@ -1,12 +1,12 @@
 package com.example.senyumdifabel.prevGroup;
 
-import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.people.People;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class PrevGroupController {
     private PrevGroupRepository prevGroupRepository;
 

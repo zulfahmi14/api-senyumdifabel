@@ -1,6 +1,5 @@
 package com.example.senyumdifabel.likes;
 
-import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.params.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class LikesController {
     private LikesRepository likesRepository;
 
