@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.chat;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.prevChat.PrevChat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,11 @@ public class ChatController {
 
     @PostMapping("/auth/sendMessage")
     public Chat sendMessage(@RequestBody Chat chat){
+        PrevChat prev = chatRepository.findPrev(chat.getId_prev());
+        //prev.setId_chat();
+        prev.setPrev_chat(chat.getMessage());
+        prev.setDate(chat.getDate());
+        prev.setTime(chat.getTime());
         return chatRepository.save(chat);
     }
 
