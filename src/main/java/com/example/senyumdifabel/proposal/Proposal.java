@@ -8,6 +8,9 @@ public class Proposal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id ;
 
+    //applied                   = 1
+    //lolos berkas(interview)   = 2
+    //gagal setelah applied     = 3
     @Column(nullable = false)
     protected Long status ;
 
