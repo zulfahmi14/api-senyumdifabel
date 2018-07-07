@@ -1,9 +1,11 @@
 package com.example.senyumdifabel.follower;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class FollowerController {
     private FollowerRepository followerRepository;
 

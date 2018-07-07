@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class FileController {
 
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
