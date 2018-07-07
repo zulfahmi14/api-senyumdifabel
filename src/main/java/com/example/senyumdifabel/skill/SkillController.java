@@ -14,24 +14,24 @@ public class SkillController {
         this.skillRepository = skillRepository;
     }
 
-    @PostMapping("/addSkill")
+    @PostMapping("/auth/addSkill")
     public Skill addSkill(@RequestBody Skill edu){
         return skillRepository.save(edu);
     }
 
-    @GetMapping("/getSkill/{id}")
+    @GetMapping("/auth/getSkill/{id}")
     public List<Skill> getEdu(@PathVariable(value = "id") Long id){
         return skillRepository.findSkill(id) ;
     }
 
-    @PutMapping("/updateSkill/{id}")
+    @PutMapping("/auth/updateSkill/{id}")
     public Skill updatecv(@PathVariable(value = "id") Long id, @RequestBody Skill peoplenew){
         Skill peopleold = skillRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setSkill(peoplenew.getSkill());
         return skillRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteSkill/{id}")
+    @DeleteMapping("/auth/deleteSkill/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Skill people = skillRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         skillRepository.delete(people);

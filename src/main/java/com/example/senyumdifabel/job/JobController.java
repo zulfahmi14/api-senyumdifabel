@@ -15,12 +15,12 @@ public class JobController {
         this.jobRepository = jobRepository;
     }
 
-    @PostMapping("/addJob")
+    @PostMapping("/auth/addJob")
     public Job addJob(@RequestBody Job edu){
         return jobRepository.save(edu);
     }
 
-    @GetMapping("/getjobs")
+    @GetMapping("/auth/getjobs")
     public List<Job> show(){
         return jobRepository.findAll();
     }
@@ -30,14 +30,14 @@ public class JobController {
 //        return jobRepository.findJob(id) ;
 //    }
 
-    @PutMapping("/updateJob/{id}")
+    @PutMapping("/auth/updateJob/{id}")
     public Job updatecv(@PathVariable(value = "id") Long id, @RequestBody Job peoplenew){
         Job peopleold = jobRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setDescription(peoplenew.getDescription());
         return jobRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteJob/{id}")
+    @DeleteMapping("/auth/deleteJob/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Job people = jobRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         jobRepository.delete(people);

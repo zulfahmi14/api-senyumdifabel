@@ -15,17 +15,17 @@ public class CompanyController {
         this.companyRepository = companyRepository;
     }
 
-    @PostMapping("/addCompany")
+    @PostMapping("/auth/addCompany")
     public Company addCompany(@RequestBody Company edu){
         return companyRepository.save(edu);
     }
 
-    @GetMapping("/getCompanies")
+    @GetMapping("/auth/getCompanies")
     public List<Company> show(){
         return companyRepository.findAll();
     }
 
-    @PutMapping("/updateCompany/{id}")
+    @PutMapping("/auth/updateCompany/{id}")
     public Company updateCompany(@PathVariable(value = "id") Long id, @RequestBody Company peoplenew){
         Company peopleold = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setUser_name(peoplenew.getUser_name());
@@ -38,7 +38,7 @@ public class CompanyController {
         return companyRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteCompany/{id}")
+    @DeleteMapping("/auth/deleteCompany/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Company people = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         companyRepository.delete(people);

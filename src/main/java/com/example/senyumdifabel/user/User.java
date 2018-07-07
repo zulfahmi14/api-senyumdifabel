@@ -1,9 +1,5 @@
 package com.example.senyumdifabel.user;
-import com.example.senyumdifabel.prevGroup.PrevGroup;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,7 +20,7 @@ public class User {
 //    @Column(nullable = false)
     protected String user_photo;
 //    @Column(nullable = false)
-    protected String user_contact;
+    protected String user_contact;      //contac buat bio aja
 
     protected boolean enabled = true;
 

@@ -15,17 +15,17 @@ public class ExperienceController {
         this.experienceRepository = experienceRepository;
     }
 
-    @PostMapping("/addExperience")
+    @PostMapping("/auth/addExperience")
     public Experience addExperience(@RequestBody Experience ex){
         return experienceRepository.save(ex);
     }
 
-    @GetMapping("/getExperience/{id}")
+    @GetMapping("/auth/getExperience/{id}")
     public List<Experience> getEdu(@PathVariable(value = "id") Long id){
         return experienceRepository.findExp(id) ;
     }
 
-    @PutMapping("/updateExperience/{id}")
+    @PutMapping("/auth/updateExperience/{id}")
     public Experience updateExperience(@PathVariable(value = "id") Long id, @RequestBody Experience peoplenew){
         Experience peopleold = experienceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setTitle(peoplenew.getTitle());
@@ -34,7 +34,7 @@ public class ExperienceController {
         return experienceRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteExperience/{id}")
+    @DeleteMapping("/auth/deleteExperience/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Experience people = experienceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         experienceRepository.delete(people);

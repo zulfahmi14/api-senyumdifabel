@@ -30,7 +30,7 @@ public class FileController {
         this.fileStorageService = fileStorageService;
     }
 
-    @PostMapping("/uploadFile")
+    @PostMapping("/uploadFile") //awalan
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
 
@@ -42,7 +42,7 @@ public class FileController {
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
-    @PostMapping("/uploadTimeline")
+    @PostMapping("/uploadTimeline")     //foto timeline
     public UploadFileResponse uploadTimeline(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeTimeline(file);
 
@@ -55,7 +55,7 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
-    @PostMapping("/uploadMultipleFiles")
+    @PostMapping("/uploadMultipleFiles")    //
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()

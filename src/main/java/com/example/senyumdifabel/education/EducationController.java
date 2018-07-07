@@ -2,10 +2,8 @@ package com.example.senyumdifabel.education;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -17,17 +15,17 @@ public class EducationController {
         this.educationRepository = educationRepository;
     }
 
-    @PostMapping("/addEducation")
+    @PostMapping("/auth/addEducation")
     public Education addEducation(@RequestBody Education edu){
         return educationRepository.save(edu);
     }
 
-    @GetMapping("/getEducation/{id}")
+    @GetMapping("/auth/getEducation/{id}")
     public List<Education> getEdu(@PathVariable(value = "id") Long id){
         return educationRepository.findEdu(id) ;
     }
 
-    @PutMapping("/updateEducation/{id}")
+    @PutMapping("/auth/updateEducation/{id}")
     public Education updatecv(@PathVariable(value = "id") Long id, @RequestBody Education peoplenew){
         Education peopleold = educationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setSchool(peoplenew.getSchool());
@@ -36,7 +34,7 @@ public class EducationController {
         return educationRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteEducation/{id}")
+    @DeleteMapping("/auth/deleteEducation/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Education people = educationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         educationRepository.delete(people);

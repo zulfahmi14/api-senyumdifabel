@@ -21,7 +21,7 @@ public class PeopleController {
         this.authoritiesRepository = authoritiesRepository;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/auth/register")
     public People register(@RequestBody People people){
         people.setUser_password(new BCryptPasswordEncoder().encode(people.getUser_password()));
         List<People> email = peopleRepository.findEmail(people.getUser_email());
@@ -40,47 +40,47 @@ public class PeopleController {
 
     }
 
-    @GetMapping("/getusers")
+    @GetMapping("/auth/getusers")
     public List<People> show(){
         return peopleRepository.findAll();
     }
 
-    @GetMapping("/getuser/{id}")
+    @GetMapping("/auth/getuser/{id}")
     public People getuser(@PathVariable(value = "id") Long id){
         return peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
     }
 
-    @GetMapping("/myGroup/{id}")
+    @GetMapping("/auth/myGroup/{id}")
     public List<PrevGroup> myGroup(@PathVariable(value = "id") Long id){
         return peopleRepository.findMyGroup(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/auth/update/{id}")
     public People updateuser(@PathVariable(value = "id") Long id, @RequestBody People peoplenew){
         People peopleold = peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setUser_name(peoplenew.getUser_name());
-        peopleold.setUser_email(peoplenew.getUser_email());
-        peopleold.setUser_password(peoplenew.getUser_password());
+//        peopleold.setUser_email(peoplenew.getUser_email());
+//        peopleold.setUser_password(peoplenew.getUser_password());
         peopleold.setUser_address(peoplenew.getUser_address());
-        peopleold.setUser_contact(peoplenew.getUser_contact());
+        peopleold.setUser_contact(peoplenew.getUser_contact());     //contact buat bio
 //        peopleold.setUser_photo(peoplenew.getUser_photo());
         return peopleRepository.save(peopleold);
     }
-    @PutMapping("/updatecv/{id}")
+    @PutMapping("/auth/updatecv/{id}")
     public People updatecv(@PathVariable(value = "id") Long id, @RequestBody People peoplenew){
         People peopleold = peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setCv(peoplenew.getCv());
         return peopleRepository.save(peopleold);
     }
 
-    @PutMapping("/updatephoto/{id}")
+    @PutMapping("/auth/updatephoto/{id}")
     public People updatephoto(@PathVariable(value = "id") Long id, @RequestBody People peoplenew){
         People peopleold = peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setUser_photo(peoplenew.getUser_photo());
         return peopleRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteuser/{id}")
+    @DeleteMapping("/auth/deleteuser/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         People people = peopleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleRepository.delete(people);
@@ -88,10 +88,10 @@ public class PeopleController {
     }
 
     //count profile
-    @GetMapping("/countFollow/{id}")
+    @GetMapping("/auth/countFollow/{id}")
     public CountFollow countFollow(@PathVariable(value = "id") Long id){
         Long countFollowing = peopleRepository.findConFollowing(id);
-        Long countFollower = peopleRepository.findConFollower(id); 
+        Long countFollower = peopleRepository.findConFollower(id);
 
         CountFollow cot = new CountFollow();
         cot.setFollower(countFollower);

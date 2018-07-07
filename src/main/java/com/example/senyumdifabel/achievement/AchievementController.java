@@ -15,27 +15,27 @@ public class AchievementController {
         this.achievementRepository = achievementRepository;
     }
 
-    @PostMapping("/addAchievement")
+    @PostMapping("/auth/addAchievement")
     public Achievement addAchievement(@RequestBody Achievement achi){
         return achievementRepository.save(achi);
     }
 
-    @GetMapping("/getAchievement/{id}")
+    @GetMapping("/auth/getAchievement/{id}")
     public List<Achievement> getAchi(@PathVariable(value = "id") Long id){
         return achievementRepository.findAchi(id) ;
     }
 
-    @PutMapping("/updateAchievement/{id}")
+    @PutMapping("/auth/updateAchievement/{id}")
     public Achievement updatecv(@PathVariable(value = "id") Long id, @RequestBody Achievement peoplenew){
         Achievement peopleold = achievementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setAchivement(peoplenew.getAchivement());
         peopleold.setForm(peoplenew.getForm());
         peopleold.setYear(peoplenew.getYear());
-        peopleold.setUser_id(peoplenew.getUser_id());
+//        peopleold.setUser_id(peoplenew.getUser_id());
         return achievementRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteAchievement/{id}")
+    @DeleteMapping("/auth/deleteAchievement/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Achievement people = achievementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         achievementRepository.delete(people);

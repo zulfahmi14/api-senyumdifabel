@@ -15,26 +15,26 @@ public class ContactController {
         this.contactRepository = contactRepository;
     }
 
-    @PostMapping("/addContact")
+    @PostMapping("/auth/addContact")
     public Contact addContact(@RequestBody Contact con){
         return contactRepository.save(con);
     }
 
-    @GetMapping("/getContact/{id}")
+    @GetMapping("/auth/getContact/{id}")
     public List<Contact> getCon(@PathVariable(value = "id") Long id){
         return contactRepository.findCon(id) ;
     }
 
-    @PutMapping("/updateContact/{id}")
+    @PutMapping("/auth/updateContact/{id}")
     public Contact updatecon(@PathVariable(value = "id") Long id, @RequestBody Contact peoplenew){
         Contact peopleold = contactRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setContact(peoplenew.getContact());
         peopleold.setForm(peoplenew.getForm());
-        peopleold.setUser_id(peoplenew.getUser_id());
+//        peopleold.setUser_id(peoplenew.getUser_id());
         return contactRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteContact/{id}")
+    @DeleteMapping("/auth/deleteContact/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Contact people = contactRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         contactRepository.delete(people);

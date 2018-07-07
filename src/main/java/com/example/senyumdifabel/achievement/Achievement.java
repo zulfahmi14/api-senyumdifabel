@@ -20,6 +20,7 @@ public class Achievement {
     @Column (nullable = false)
     protected String year;
 
+    public Achievement(){}
     public Achievement(Long user_id, String achivement, String form, String year) {
         this.user_id = user_id;
         this.achivement = achivement;

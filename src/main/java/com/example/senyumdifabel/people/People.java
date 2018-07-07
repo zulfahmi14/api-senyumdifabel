@@ -67,7 +67,7 @@ public class People extends User {
         this.cv = cv;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Timeline> getTimelines() {
         return timelines;
     }
@@ -102,7 +102,7 @@ public class People extends User {
         this.myGroup = myGroup;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Education> getEducations() {
         return educations;
     }
@@ -111,7 +111,7 @@ public class People extends User {
         this.educations = educations;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Experience> getExperiences() {
         return experiences;
     }
@@ -120,7 +120,7 @@ public class People extends User {
         this.experiences = experiences;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Skill> getSkills() {
         return skills;
     }
@@ -129,7 +129,7 @@ public class People extends User {
         this.skills = skills;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Achievement> getAchievements() {
         return achievements;
     }
@@ -138,7 +138,7 @@ public class People extends User {
         this.achievements = achievements;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public List<Contact> getContacts() {
         return contacts;
     }
