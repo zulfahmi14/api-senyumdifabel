@@ -42,7 +42,7 @@ public interface PeopleRepository extends JpaRepository< People, Long> {
     @Query("select COUNT (p) from Following p where p.user_id = ?1")
     Long findConFollowing(Long user_id);
 
-    @Query("select COUNT (p) from Follower p where p.user_id = ?1")
+    @Query("select COUNT (p) from Following p where p.follow = ?1")
     Long findConFollower(Long user_id);
 
 //    @Query("select t from Timeline ")

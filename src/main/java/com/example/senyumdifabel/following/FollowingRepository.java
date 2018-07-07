@@ -13,4 +13,5 @@ public interface FollowingRepository extends JpaRepository<Following, Long> {
 
     @Query("select u from Following u where u.follow = ?1")
     List<Following> findFollower(Long id);
+
 }

@@ -21,20 +21,20 @@ public class FollowingController {
         return followingRepository.save(fol);
     }
 
-//    @GetMapping("/getFollowings")
-//    public List<Following> show(){
-//        return followingRepository.findAll();
-//    }
+    @GetMapping("/auth/getFollowings")
+    public List<Following> show(){
+        return followingRepository.findAll();
+    }
 
     @GetMapping("/auth/getFollowing/{id}")
     public List<Following> findFollowing(@PathVariable(value = "id") Long id){
         return followingRepository.findFollowing(id) ;
     }
 
-//    @GetMapping("/getFollower/{id}")
-//    public List<Following> findFollower(@PathVariable(value = "id") Long id){
-//        return followingRepository.findFollower(id) ;
-//    }
+    @GetMapping("/auth/getFollower/{id}")
+    public List<Following> findFollower(@PathVariable(value = "id") Long id){
+        return followingRepository.findFollower(id) ;
+    }
 
     @PutMapping("/auth/updateFollowing/{id}")
     public Following updateFollowing(@PathVariable(value = "id") Long id, @RequestBody Following peoplenew){

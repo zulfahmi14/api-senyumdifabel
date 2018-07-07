@@ -14,6 +14,7 @@ public class Following {
     @Column(nullable = false)
     protected Long follow ;
 
+
     public Following(){}
 
     public Following(Long user_id, Long follow) {
