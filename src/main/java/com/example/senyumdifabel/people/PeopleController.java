@@ -21,7 +21,7 @@ public class PeopleController {
         this.authoritiesRepository = authoritiesRepository;
     }
 
-    @PostMapping("/auth/register")
+    @PostMapping("/register")
     public People register(@RequestBody People people){
         people.setUser_password(new BCryptPasswordEncoder().encode(people.getUser_password()));
         List<People> email = peopleRepository.findEmail(people.getUser_email());
