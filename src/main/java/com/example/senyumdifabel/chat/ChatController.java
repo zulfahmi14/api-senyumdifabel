@@ -13,22 +13,22 @@ public class ChatController {
     @Autowired
     public ChatController(ChatRepository chatRepository){this.chatRepository = chatRepository;}
 
-    @PostMapping("auth/sendMessage")
+    @PostMapping("/auth/sendMessage")
     public Chat sendMessage(@RequestBody Chat chat){
         return chatRepository.save(chat);
     }
 
-    @GetMapping("auth/getChat/{id}")
+    @GetMapping("/auth/getChat/{id}")
     public Chat loadChat(@PathVariable(value ="id") Long x){
         return chatRepository.findById(x).orElseThrow(() -> new ResourceNotFoundException("Id " + x.toString() + " not found"));
     }
 
-    @GetMapping("auth/loadChat/{id}")
+    @GetMapping("/auth/loadChat/{id}")
     public List<Chat> getChat(@PathVariable(value ="id") Long x){
         return chatRepository.loadChat(x);
     }
 
-    @DeleteMapping("auth/deleteChat/{id}")
+    @DeleteMapping("/auth/deleteChat/{id}")
     public boolean deleteChat(@PathVariable(value = "id") Long id) {
         Chat people = chatRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         chatRepository.delete(people);

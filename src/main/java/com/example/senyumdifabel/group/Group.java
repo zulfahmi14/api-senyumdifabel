@@ -9,7 +9,7 @@ public class Group {
     protected Long id ;
 
     @Column (nullable = false)
-    protected String sender ;
+    protected Long sender ;
 
     @Column (nullable = false)
     protected Long id_prev ;
@@ -23,13 +23,21 @@ public class Group {
     @Column (nullable = false)
     protected String time ;
 
-    public Group(Long id, String sender, Long id_prev, String message, String date, String time) {
+    public Group(Long id, Long sender, Long id_prev, String message, String date, String time) {
         this.id = id;
         this.sender = sender;
         this.id_prev = id_prev;
         this.message = message;
         this.date = date;
         this.time = time;
+    }
+
+    public Long getSender() {
+        return sender;
+    }
+
+    public void setSender(Long sender) {
+        this.sender = sender;
     }
 
     public Long getId_prev() {
@@ -46,14 +54,6 @@ public class Group {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
     }
 
     public String getMessage() {

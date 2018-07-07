@@ -30,7 +30,7 @@ public class FileController {
         this.fileStorageService = fileStorageService;
     }
 
-    @PostMapping("/uploadFile") //awalan
+    @PostMapping("/auth/uploadFile") //awalan
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
 
@@ -42,7 +42,7 @@ public class FileController {
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
-    @PostMapping("/uploadTimeline")     //foto timeline
+    @PostMapping("/auth/uploadTimeline")     //foto timeline
     public UploadFileResponse uploadTimeline(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeTimeline(file);
 
@@ -55,7 +55,7 @@ public class FileController {
                 file.getContentType(), file.getSize());
     }
 
-    @PostMapping("/uploadMultipleFiles")    //
+    @PostMapping("/auth/uploadMultipleFiles")    //
     public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
                 .stream()
@@ -63,7 +63,7 @@ public class FileController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/downloadFile/{fileName:.+}")
+    @GetMapping("/auth/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = fileStorageService.loadFileAsResource(fileName);

@@ -32,7 +32,7 @@ public class PrevGroup {
 
     protected  String photo ;
 
-    protected long id_chat ;
+    protected Long id_chat ;
 
 //    @Column (nullable = false)
 //    protected Long user_id ;
@@ -49,11 +49,11 @@ public class PrevGroup {
         this.id_chat = id_chat;
     }
 
-    public long getId_chat() {
+    public Long getId_chat() {
         return id_chat;
     }
 
-    public void setId_chat(long id_chat) {
+    public void setId_chat(Long id_chat) {
         this.id_chat = id_chat;
     }
 

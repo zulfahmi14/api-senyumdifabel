@@ -18,36 +18,36 @@ public class NotificationController {
         this.notificationRepository = notificationRepository;
     }
 
-    @PostMapping("/pushNotification/comment")
+    @PostMapping("/auth/pushNotification/comment")
     public Notification pushNotificationComment(@RequestBody Notification notification){
         notification.setType(4L);
         return notificationRepository.save(notification);
     }
 
-    @PostMapping("/pushNotification/like")
+    @PostMapping("/auth/pushNotification/like")
     public Notification pushNotificationLike(@RequestBody Notification notification){
         notification.setType(3L);
         return notificationRepository.save(notification);
     }
 
-    @PostMapping("/pushNotification/follow")
+    @PostMapping("/auth/pushNotification/follow")
     public Notification pushNotificationFollow(@RequestBody Notification notification){
         notification.setType(2L);
         return notificationRepository.save(notification);
     }
 
-    @PostMapping("/pushNotification/Proposal")
+    @PostMapping("/auth/pushNotification/Proposal")
     public Notification pushNotificationProposal(@RequestBody Notification notification){
         notification.setType(1L);
         return notificationRepository.save(notification);
     }
 
-    @GetMapping("/getCountNotification/{id}")
+    @GetMapping("/auth/getCountNotification/{id}")
     public Long getCountNotif(@PathVariable(value = "id") Long id){
         return notificationRepository.CountEnable(id);
     }
 
-    @GetMapping("/getNotification/{id}")
+    @GetMapping("/auth/getNotification/{id}")
     public List<getNotification> getnotif(@PathVariable(value = "id") Long id){
         List<getNotification> getnotif = new ArrayList<>() ;
         List<Notification> x = notificationRepository.findbyEnable(id,false);

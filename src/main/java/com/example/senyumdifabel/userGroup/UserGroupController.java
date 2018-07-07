@@ -13,12 +13,12 @@ public class UserGroupController {
         this.userGroupRepository = userGroupRepository;
     }
 
-    @PostMapping("/joinGroup")
+    @PostMapping("/auth/joinGroup")
     public UserGroup joinGroup(@RequestBody UserGroup userGroup){
         return userGroupRepository.save(userGroup);
     }
 
-    @PostMapping("/leaveGroup")
+    @PostMapping("/auth/leaveGroup")
     public boolean deleteuser(@RequestBody Params x) {
         Long x1 = x.getParam1() ;
         Long x2 = x.getParam2() ;

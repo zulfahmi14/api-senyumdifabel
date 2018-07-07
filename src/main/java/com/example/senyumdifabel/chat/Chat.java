@@ -14,7 +14,7 @@ public class Chat {
     protected Long id_prev ;
 
     @Column (nullable = false)
-    protected String sender ;
+    protected Long sender ;
 
     @Column ( nullable = false)
     protected String message ;
@@ -28,7 +28,7 @@ public class Chat {
     public Chat() {
     }
 
-    public Chat(Long id, Long id_prev, String sender, String message, String date, String time) {
+    public Chat(Long id, Long id_prev, Long sender, String message, String date, String time) {
         this.id = id;
         this.id_prev = id_prev;
         this.sender = sender;
@@ -53,11 +53,11 @@ public class Chat {
         this.id = id;
     }
 
-    public String getSender() {
+    public Long getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
+    public void setSender(Long sender) {
         this.sender = sender;
     }
 

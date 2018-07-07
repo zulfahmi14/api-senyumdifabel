@@ -16,12 +16,12 @@ public class LikesController {
         this.likesRepository = likesRepository;
     }
 
-    @PostMapping("/addLikes")
+    @PostMapping("/auth/addLikes")
     public Likes addLike(@RequestBody Likes like){
         return likesRepository.save(like);
     }
 
-    @PostMapping("/deleteLike")
+    @PostMapping("/auth/deleteLike")
     public boolean deleteLike(@RequestBody Params like){
         Long user_id = like.getParam1() ;
         Long timeline_id = like.getParam2() ;
@@ -34,7 +34,7 @@ public class LikesController {
         }
     }
 
-    @GetMapping("/getLikes/{id}") // timeline_id
+    @GetMapping("/auth/getLikes/{id}") // timeline_id
     public List<Likes> getLike(@PathVariable(value = "id") Long id){
         return likesRepository.findLike(id) ;
     }

@@ -11,27 +11,26 @@ import java.util.List;
 @RestController
 public class GroupController {
     private GroupRepository groupRepository;
-    private PrevGroupRepository prevGroupRepository ;
 
     @Autowired
     public GroupController(GroupRepository groupRepository){this.groupRepository = groupRepository;}
 
-    @PostMapping("/sendMessageGroup")
+    @PostMapping("/auth/sendMessageGroup")
     public Group sendMessage(@RequestBody Group group){
         return groupRepository.save(group);
     }
 
-    @GetMapping("/getGroup/{id}")
+    @GetMapping("/auth/getGroup/{id}")
     public Group getGroup(@PathVariable(value ="id") Long x){
         return groupRepository.findById(x).orElseThrow(() -> new ResourceNotFoundException("Id " + x.toString() + " not found"));
     }
 
-    @GetMapping("/loadChatGroup/{id}")
+    @GetMapping("/auth/loadChatGroup/{id}")
     public List<Group> loadGroup(@PathVariable(value ="id") Long x){
         return groupRepository.loadGroupChat(x);
     }
 
-    @DeleteMapping("/deleteChatGroup/{id}")
+    @DeleteMapping("/auth/deleteChatGroup/{id}")
     public boolean deleteChatGroup(@PathVariable(value = "id") Long id) {
         Group people = groupRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         groupRepository.delete(people);

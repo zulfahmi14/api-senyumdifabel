@@ -13,17 +13,17 @@ public class ProposalController {
         this.proposalRepository = proposalRepository;
     }
 
-    @PostMapping("/addProposal")
+    @PostMapping("/auth/addProposal")
     public Proposal addProposal(@RequestBody Proposal edu){
         return proposalRepository.save(edu);
     }
 
-    @GetMapping("/getProposalByCompany/{id}")
+    @GetMapping("/auth/getProposalByCompany/{id}")
     public List<Proposal> getProposalByCompany(@PathVariable(value = "id") Long id){
         return proposalRepository.findByCompany(id) ;
     }
 
-    @GetMapping("/getProposalByPeople/{id}")
+    @GetMapping("/auth/getProposalByPeople/{id}")
     public List<Proposal> getProposalByPeople(@PathVariable(value = "id") Long id){
         return proposalRepository.findByUser(id) ;
     }
@@ -35,7 +35,7 @@ public class ProposalController {
         return proposalRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteProposal/{id}")
+    @DeleteMapping("/auth/deleteProposal/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Proposal people = proposalRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         proposalRepository.delete(people);

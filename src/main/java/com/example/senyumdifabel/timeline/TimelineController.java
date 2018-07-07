@@ -20,22 +20,22 @@ public class TimelineController {
         this.timelineRepository = timelineRepository;
     }
 
-    @PostMapping("/postTimeline")
+    @PostMapping("/auth/postTimeline")
     public Timeline postTimeline(@RequestBody Timeline timeline){
         return timelineRepository.save(timeline);
     }
 
-    @GetMapping("/getTimelines")
+    @GetMapping("/auth/getTimelines")
     public List<Timeline> show(){
         return timelineRepository.findAll();
     }
 
-    @GetMapping("/getTimeline/{id}")
+    @GetMapping("/auth/getTimeline/{id}")
     public Timeline getTimeline(@PathVariable(value = "id") Long id){
         return timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
     }
 
-    @GetMapping("/getMyTimeline/{id}")
+    @GetMapping("/auth/getMyTimeline/{id}")
     public List<TimelineUser> getMyTimeline(@PathVariable(value = "id") Long id){
         List<TimelineUser> x = new ArrayList<>();
         List<Timeline> temp ;
@@ -63,7 +63,7 @@ public class TimelineController {
         return x;
     }
 
-    @GetMapping("/getFollowingTimeline/{id}")
+    @GetMapping("/auth/getFollowingTimeline/{id}")
     public List<TimelineUser> getFollowingTimeline(@PathVariable(value = "id") Long id){
         List<Following> Follow  = timelineRepository.findFollowing(id) ;
         List<TimelineUser> timelines= new ArrayList<>();
@@ -105,7 +105,7 @@ public class TimelineController {
         return timelines;
     }
 
-    @DeleteMapping("/deleteTimeline/{id}")
+    @DeleteMapping("/auth/deleteTimeline/{id}")
     public boolean deleteTimeline(@PathVariable(value = "id") Long id){
         Timeline timeline = timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         timelineRepository.delete(timeline);
