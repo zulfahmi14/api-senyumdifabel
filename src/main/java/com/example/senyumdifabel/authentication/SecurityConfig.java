@@ -60,9 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.POST, "/pelapor/**", "/laporan/**", "/uploadFile/**")
 //                .permitAll()
 //
-                .antMatchers( "/**")
+                .antMatchers( "/auth/**")
                     .hasRole("USER")
-                .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
 //                .antMatchers(HttpMethod.POST, "/petugas/**")
 //                .hasRole("ADMIN")
