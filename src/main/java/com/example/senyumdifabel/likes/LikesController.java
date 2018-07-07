@@ -40,11 +40,11 @@ public class LikesController {
     }
 
 
-    @DeleteMapping("/deleteLikes/{id}")
-    public boolean deleteLike(@PathVariable(value = "id") Long id) {
-        Likes people = likesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
-        likesRepository.delete(people);
-        return true;
-    }
+//    @DeleteMapping("/deleteLikes/{id}")
+//    public boolean deleteLike(@PathVariable(value = "id") Long id) {
+//        Likes people = likesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+//        likesRepository.delete(people);
+//        return true;
+//    }
 
 }

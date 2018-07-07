@@ -17,7 +17,7 @@ public class CommentController {
         this.commentRepository = commentRepository;
     }
 
-    @PostMapping("/addComment")
+    @PostMapping("auth/addComment")
     public Comment addComment(@RequestBody Comment com){
         return commentRepository.save(com);
     }
@@ -27,7 +27,7 @@ public class CommentController {
 //        return commentRepository.findCom(id) ;
 //    }
 
-    @GetMapping("/getComments/{id}")
+    @GetMapping("auth/getComments/{id}")
     public List<CommentUser> getComment(@PathVariable(value = "id") Long id)
     {
         List<CommentUser> send = new ArrayList<CommentUser>();
@@ -49,12 +49,12 @@ public class CommentController {
         return send ;
     }
 
-    @GetMapping("/countComment/{id}")
+    @GetMapping("auth/countComment/{id}")
     public Long countComment(@PathVariable(value = "id") Long id){
         return commentRepository.countCom(id) ;
     }
 
-    @PutMapping("/updateComment/{id}")
+    @PutMapping("auth/updateComment/{id}")
     public Comment updateCom(@PathVariable(value = "id") Long id, @RequestBody Comment peoplenew){
         Comment peopleold = commentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         peopleold.setComment(peoplenew.getComment());
@@ -63,7 +63,7 @@ public class CommentController {
         return commentRepository.save(peopleold);
     }
 
-    @DeleteMapping("/deleteComment/{id}")
+    @DeleteMapping("auth/deleteComment/{id}")
     public boolean deleteuser(@PathVariable(value = "id") Long id) {
         Comment people = commentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
         commentRepository.delete(people);
