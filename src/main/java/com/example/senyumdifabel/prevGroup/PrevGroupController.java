@@ -14,12 +14,12 @@ public class PrevGroupController {
         this.prevGroupRepository = prevGroupRepository;
     }
 
-    @PostMapping("/createGroup")
+    @PostMapping("/auth/createGroup")
     public PrevGroup createGroup(@RequestBody PrevGroup prevGroup){
         return prevGroupRepository.save(prevGroup);
     }
 
-    @GetMapping("/groupMember/{id}")
+    @GetMapping("/auth/groupMember/{id}")
     public List<People> myGroup(@PathVariable(value = "id") Long id){
         return prevGroupRepository.findMember(id);
     }

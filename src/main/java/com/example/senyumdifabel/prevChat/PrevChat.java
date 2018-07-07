@@ -38,6 +38,14 @@ public class PrevChat {
         this.id_chat = id_chat;
     }
 
+    public Long getId_chat() {
+        return id_chat;
+    }
+
+    public void setId_chat(Long id_chat) {
+        this.id_chat = id_chat;
+    }
+
     public Long getId() {
         return id;
     }
