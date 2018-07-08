@@ -40,6 +40,10 @@ public class PeopleController {
         }
 
     }
+    @GetMapping("/auth/login")
+    public String login(){
+        return "succses!";
+    }
 
     @GetMapping("/auth/getusers")
     public List<People> show(){
