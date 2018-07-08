@@ -1,8 +1,11 @@
 package com.example.senyumdifabel.proposal;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.job.Job;
+import com.example.senyumdifabel.params.JobCompany;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,6 +31,76 @@ public class ProposalController {
     public List<Proposal> getProposalByPeople(@PathVariable(value = "id") Long id){
         return proposalRepository.findByUser(id) ;
     }
+
+    //status = 1, Applied job
+    @GetMapping("/auth/getApplied/{id}") // user id
+    public List<JobCompany> getApplied(@PathVariable(value = "id") Long id){
+        List<JobCompany> send = new ArrayList<JobCompany>();
+        List<Proposal> c = proposalRepository.findAppliedJob(id);
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getJob_id();
+            Job job = proposalRepository.findJob(idx);
+            JobCompany temp = new JobCompany() ;
+            temp.setName(job.getName());
+            temp.setCompany_id(job.getCompany_id());
+            temp.setDate(job.getDate());
+            temp.setTime(job.getTime());
+            temp.setDescription(job.getDescription());
+            temp.setJob_id(c.get(i).getJob_id());
+            temp.setName(job.getName());
+            temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            send.add(temp);
+        }
+        return send;
+    }
+
+    //status = 2, Interview
+    @GetMapping("/auth/getInterview/{id}") //user id
+    public List<JobCompany> getInterview(@PathVariable(value = "id") Long id){
+        List<JobCompany> send = new ArrayList<JobCompany>();
+        List<Proposal> c = proposalRepository.findInterview(id);
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getJob_id();
+            Job job = proposalRepository.findJob(idx);
+            JobCompany temp = new JobCompany() ;
+            temp.setName(job.getName());
+            temp.setCompany_id(job.getCompany_id());
+            temp.setDate(job.getDate());
+            temp.setTime(job.getTime());
+            temp.setDescription(job.getDescription());
+            temp.setJob_id(c.get(i).getJob_id());
+            temp.setName(job.getName());
+            temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            send.add(temp);
+        }
+        return send;
+    }
+
+    //status = 1, Applied job
+    @GetMapping("/auth/getFailed/{id}")
+    public List<JobCompany> getFailed(@PathVariable(value = "id") Long id){
+        List<JobCompany> send = new ArrayList<JobCompany>();
+        List<Proposal> c = proposalRepository.findFailed(id);
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getJob_id();
+            Job job = proposalRepository.findJob(idx);
+            JobCompany temp = new JobCompany() ;
+            temp.setName(job.getName());
+            temp.setCompany_id(job.getCompany_id());
+            temp.setDate(job.getDate());
+            temp.setTime(job.getTime());
+            temp.setDescription(job.getDescription());
+            temp.setJob_id(c.get(i).getJob_id());
+            temp.setName(job.getName());
+            temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            send.add(temp);
+        }
+        return send;
+    }
+
 
     @PutMapping("/confirmProposal/{id}")
     public Proposal updatecv(@PathVariable(value = "id") Long id, @RequestBody Proposal peoplenew){

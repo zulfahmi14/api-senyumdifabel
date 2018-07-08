@@ -28,12 +28,12 @@ public class Job {
     protected String time ;
 
     @Column(nullable = false)
-    protected String company_id ;
+    protected Long company_id ;
 
     public Job() {
     }
 
-    public Job(String name, String description, String date, String time, String company_id) {
+    public Job(String name, String description, String date, String time, Long company_id) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -89,11 +89,11 @@ public class Job {
         this.time = time;
     }
 
-    public String getCompany_id() {
+    public Long getCompany_id() {
         return company_id;
     }
 
-    public void setCompany_id(String company_id) {
+    public void setCompany_id(Long company_id) {
         this.company_id = company_id;
     }
 }

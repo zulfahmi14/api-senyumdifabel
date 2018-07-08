@@ -1,9 +1,11 @@
 package com.example.senyumdifabel.job;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.params.JobCompany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,8 +24,23 @@ public class JobController {
     }
 
     @GetMapping("/auth/getjobs")
-    public List<Job> show(){
-        return jobRepository.findAll();
+    public List<JobCompany> show(){
+        List<JobCompany> send = new ArrayList<JobCompany>();
+        List<Job> c = jobRepository.findAll();
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getCompany_id();
+            JobCompany temp = new JobCompany() ;
+            temp.setCompany_name(jobRepository.findCompanyName(idx));
+            temp.setJob_id(c.get(i).getJob_id());
+            temp.setDate(c.get(i).getDate());
+            temp.setTime(c.get(i).getTime());
+            temp.setName(c.get(i).getName());
+            temp.setDescription(c.get(i).getDescription());
+            temp.setCompany_id(c.get(i).getCompany_id());
+            send.add(temp);
+        }
+        return send;
     }
 
 //    @GetMapping("/getJob/{id}")
