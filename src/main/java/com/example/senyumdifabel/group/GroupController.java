@@ -12,12 +12,22 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class GroupController {
     private GroupRepository groupRepository;
+    private PrevGroupRepository prevGroupRepository ;
 
     @Autowired
-    public GroupController(GroupRepository groupRepository){this.groupRepository = groupRepository;}
+    public GroupController(GroupRepository groupRepository, PrevGroupRepository prevGroupRepository) {
+        this.groupRepository = groupRepository;
+        this.prevGroupRepository = prevGroupRepository;
+    }
 
     @PostMapping("/auth/sendMessageGroup")
     public Group sendMessage(@RequestBody Group group){
+        PrevGroup prev = groupRepository.findPrev(group.getId_prev());
+        //prev.setId_chat();configure .htaccess in tomcat
+        prev.setPrev_chat(group.getMessage());
+        prev.setDate(group.getDate());
+        prev.setTime(group.getTime());
+        prevGroupRepository.save(prev);
         return groupRepository.save(group);
     }
 
