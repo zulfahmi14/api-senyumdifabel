@@ -1,11 +1,11 @@
-package com.example.senyumdifabel.group;
+package com.example.senyumdifabel.groups;
 
 import javax.persistence.*;
 
 @Entity
-public class Group {
+public class Groups {
     @Id
-    @Column (nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id ;
 
     @Column (nullable = false)
@@ -23,7 +23,10 @@ public class Group {
     @Column (nullable = false)
     protected String time ;
 
-    public Group(Long id, Long sender, Long id_prev, String message, String date, String time) {
+    public Groups() {
+    }
+
+    public Groups(Long id, Long sender, Long id_prev, String message, String date, String time) {
         this.id = id;
         this.sender = sender;
         this.id_prev = id_prev;
@@ -79,4 +82,5 @@ public class Group {
     public void setTime(String time) {
         this.time = time;
     }
+
 }

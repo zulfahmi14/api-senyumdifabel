@@ -1,13 +1,11 @@
 package com.example.senyumdifabel.chat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Chat {
     @Id
-    @Column (nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id ;
 
     @Column(nullable = false)
