@@ -36,7 +36,8 @@ public class FollowingController {
         for(int i = 0 ; i < c.size() ; i++)
         {
             Long idx = c.get(i).getFollow();
-            NamePhoto temp = new NamePhoto() ;
+            NamePhoto temp = new NamePhoto();
+            temp.setUser_id(c.get(i).getUser_id());
             temp.setUser_name(followingRepository.findUserName(idx));
             temp.setUser_photo(followingRepository.findUserPhoto(idx));
             send.add(temp);
@@ -51,7 +52,8 @@ public class FollowingController {
         for(int i = 0 ; i < c.size() ; i++)
         {
             Long idx = c.get(i).getFollow();
-            NamePhoto temp = new NamePhoto() ;
+            NamePhoto temp = new NamePhoto();
+            temp.setUser_id(c.get(i).getUser_id());
             temp.setUser_name(followingRepository.findUserName(idx));
             temp.setUser_photo(followingRepository.findUserPhoto(idx));
             send.add(temp);
