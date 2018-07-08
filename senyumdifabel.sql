@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 07 Jul 2018 pada 17.06
+-- Generation Time: 08 Jul 2018 pada 07.09
 -- Versi Server: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -44,6 +44,18 @@ CREATE TABLE `authorities` (
   `username` varchar(255) NOT NULL,
   `authority` varchar(255) DEFAULT NULL,
   `people_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `bookmark`
+--
+
+CREATE TABLE `bookmark` (
+  `id` bigint(20) NOT NULL,
+  `job_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -155,6 +167,21 @@ CREATE TABLE `following` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `groups`
+--
+
+CREATE TABLE `groups` (
+  `id` bigint(20) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `id_prev` bigint(20) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `sender` bigint(20) NOT NULL,
+  `time` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `hibernate_sequence`
 --
 
@@ -180,7 +207,7 @@ INSERT INTO `hibernate_sequence` (`next_val`) VALUES
 
 CREATE TABLE `job` (
   `job_id` bigint(20) NOT NULL,
-  `company_id` varchar(255) NOT NULL,
+  `company_id` bigint(20) NOT NULL,
   `date` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -348,6 +375,12 @@ ALTER TABLE `authorities`
   ADD KEY `FKp26iicny931eyc6a8hhq7ptw4` (`people_id`);
 
 --
+-- Indexes for table `bookmark`
+--
+ALTER TABLE `bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `chat`
 --
 ALTER TABLE `chat`
@@ -400,10 +433,17 @@ ALTER TABLE `following`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `job`
 --
 ALTER TABLE `job`
-  ADD PRIMARY KEY (`job_id`);
+  ADD PRIMARY KEY (`job_id`),
+  ADD KEY `FK5q04favsasq8y70bsei7wv8fc` (`company_id`);
 
 --
 -- Indexes for table `likes`
@@ -483,6 +523,16 @@ ALTER TABLE `user_group`
 ALTER TABLE `achievement`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `bookmark`
+--
+ALTER TABLE `bookmark`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
@@ -511,6 +561,11 @@ ALTER TABLE `follower`
 -- AUTO_INCREMENT for table `following`
 --
 ALTER TABLE `following`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `job`
@@ -587,6 +642,12 @@ ALTER TABLE `education`
 --
 ALTER TABLE `experience`
   ADD CONSTRAINT `FKs7jiw34i89s38cd27tfrx52s6` FOREIGN KEY (`user_id`) REFERENCES `people` (`user_id`);
+
+--
+-- Ketidakleluasaan untuk tabel `job`
+--
+ALTER TABLE `job`
+  ADD CONSTRAINT `FK5q04favsasq8y70bsei7wv8fc` FOREIGN KEY (`company_id`) REFERENCES `company` (`user_id`);
 
 --
 -- Ketidakleluasaan untuk tabel `likes`
