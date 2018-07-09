@@ -4,13 +4,15 @@ public class NamePhoto {
     protected Long user_id;
     protected String user_name;
     protected String user_photo;
+    protected String user_job;
 
     public NamePhoto(){}
 
-    public NamePhoto(Long user_id, String user_name, String user_photo) {
+    public NamePhoto(Long user_id, String user_name, String user_photo, String user_job) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.user_photo = user_photo;
+        this.user_job = user_job;
     }
 
     public Long getUser_id() {
@@ -35,5 +37,13 @@ public class NamePhoto {
 
     public void setUser_photo(String user_photo) {
         this.user_photo = user_photo;
+    }
+
+    public String getUser_job() {
+        return user_job;
+    }
+
+    public void setUser_job(String user_job) {
+        this.user_job = user_job;
     }
 }

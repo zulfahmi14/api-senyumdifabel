@@ -22,8 +22,15 @@ public class ExperienceController {
     }
 
     @GetMapping("/auth/getExperience/{id}")
-    public List<Experience> getEdu(@PathVariable(value = "id") Long id){
-        return experienceRepository.findExp(id) ;
+    public List<Experience> getExperience(@PathVariable(value = "id") Long id){
+        return experienceRepository.findExp(id);
+    }
+
+    @GetMapping("/auth/getJob/{id}")
+    public Experience getJob(@PathVariable(value = "id") Long id){
+         List<Experience> List = experienceRepository.findJob(id);
+         Experience job = List.get(0);
+         return job;
     }
 
     @PutMapping("/auth/updateExperience/{id}")

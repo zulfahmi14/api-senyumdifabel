@@ -21,6 +21,9 @@ public interface PeopleRepository extends JpaRepository< People, Long> {
     @Query("select u from People u where u.user_email = ?1")
     List<People> findEmail(String email);
 
+    @Query("select u from People u where u.user_email = ?1")
+    People findemail(String user_email);
+
     @Query("select p from People p where p.user_id = ?1")
     ProfileUser  findProfile(Long user_id);
 

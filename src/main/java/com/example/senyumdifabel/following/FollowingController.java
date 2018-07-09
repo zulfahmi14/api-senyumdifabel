@@ -40,6 +40,7 @@ public class FollowingController {
             temp.setUser_id(c.get(i).getUser_id());
             temp.setUser_name(followingRepository.findUserName(idx));
             temp.setUser_photo(followingRepository.findUserPhoto(idx));
+            temp.setUser_job(followingRepository.findJob(idx).get(0).getTitle());
             send.add(temp);
         }
         return send;
@@ -56,6 +57,7 @@ public class FollowingController {
             temp.setUser_id(c.get(i).getUser_id());
             temp.setUser_name(followingRepository.findUserName(idx));
             temp.setUser_photo(followingRepository.findUserPhoto(idx));
+            temp.setUser_job(followingRepository.findJob(idx).get(0).getTitle());
             send.add(temp);
         }
         return send;

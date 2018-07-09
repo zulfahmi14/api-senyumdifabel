@@ -9,7 +9,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long user_id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     protected String user_name;
     @Column(nullable = false)
     protected String user_email;

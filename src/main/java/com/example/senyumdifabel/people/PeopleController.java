@@ -40,9 +40,9 @@ public class PeopleController {
         }
 
     }
-    @GetMapping("/auth/login")
-    public String login(){
-        return "succses!";
+    @PostMapping("/auth/login")
+    public People login(@RequestBody People people){
+        return peopleRepository.findemail(people.getUser_email());
     }
 
     @GetMapping("/auth/getusers")
