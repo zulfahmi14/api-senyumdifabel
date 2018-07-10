@@ -1,6 +1,5 @@
 package com.example.senyumdifabel.timeline;
 
-
 import com.example.senyumdifabel.comment.Comment;
 import com.example.senyumdifabel.likes.Likes;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,9 +18,9 @@ public class Timeline {
     protected Long user_id;
     @Column(nullable = false)
     protected String timeline_description;
+
     protected String timeline_date;
     protected String timeline_time;
-
     protected String timeline_photo;
 
     @OneToMany(cascade = {CascadeType.ALL})
@@ -30,11 +29,7 @@ public class Timeline {
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "timeline_id")
-//    private Comment comment;
     private List<Comment> comment = new ArrayList<>();
-
-//    private CommentRepository commentRepository;
-
 //    Constructor
     public Timeline(){
 

@@ -50,9 +50,14 @@ public class TimelineController {
         List<TimelineUser> x = new ArrayList<>();
         List<Timeline> temp ;
         temp = timelineRepository.findTimeline(id);
-        People people = timelineRepository.FindUser(id);
-        int size = people.getExperiences().size() ;
-        String job = people.getExperiences().get(size-1).getTitle() ;
+        People people = timelineRepository.FindUser(id) ;
+        List<Experience> ex = timelineRepository.FindEx(id) ;
+        String job ;
+        if(ex.size()<1)
+            job = "" ;
+        else
+            job = ex.get(ex.size()-1).getTitle() ;
+
         for(int j=0 ;j< temp.size() ; j++)
         {
             TimelineUser timeline = new TimelineUser() ;
@@ -83,18 +88,19 @@ public class TimelineController {
         {
             Long y ;
             if(i<Follow.size())
-            {
                 y = Follow.get(i).getUser_id();
-            }
             else
-            {
                 y = id ;
-            }
+
             List<Timeline> temp ;
             temp = timelineRepository.findTimeline(y);
-            People people = timelineRepository.FindUser(id);
-            int size = people.getExperiences().size() ;
-            String job = people.getExperiences().get(size-1).getTitle() ;
+            People people = timelineRepository.FindUser(y) ;
+            List<Experience> ex = timelineRepository.FindEx(y) ;
+            String job = new String();
+            if(ex.size()<1)
+                job = "" ;
+            else
+                job = ex.get(ex.size()-1).getTitle() ;
 
             for(int j=0 ;j< temp.size() ; j++)
             {

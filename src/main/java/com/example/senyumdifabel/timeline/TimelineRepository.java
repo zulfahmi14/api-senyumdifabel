@@ -1,4 +1,5 @@
 package com.example.senyumdifabel.timeline;
+import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.following.Following;
 //import com.example.senyumdifabel.people.People;
 //import com.example.senyumdifabel.likes.Likes;
@@ -18,14 +19,11 @@ public interface TimelineRepository  extends JpaRepository<Timeline,Long>  {
     @Query("select u from Following u where u.user_id = ?1")
     List<Following> findFollowing(long id);
 
-    @Query("select user_name from People u where u.user_id = ?1")
-    String FindUserName(Long y);
-
-    @Query("select user_photo from People u where u.user_id = ?1")
-    String FindPhoto(Long y);
-
     @Query("select u from People u where u.user_id = ?1")
     People FindUser(Long y);
+
+    @Query("select u.experiences from People u where u.user_id = ?1")
+    List<Experience> FindEx(long y) ;
 
     @Query("select COUNT (com) from Likes com where com.timeline_id = ?1")
     Long FindCountLike(Long y);
