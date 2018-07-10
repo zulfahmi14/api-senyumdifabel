@@ -7,25 +7,36 @@ import java.util.Comparator;
 public class TimelineUser extends Timeline {
     protected String user_photo ;
     protected String user_name ;
+    protected String user_job ;
     protected Long like ;
     protected Long comments ;
 
     public TimelineUser() {
     }
 
-    public TimelineUser(String user_photo, String user_name, Long like, Long comments) {
+    public TimelineUser(String user_photo, String user_name, String user_job, Long like, Long comments) {
         this.user_photo = user_photo;
         this.user_name = user_name;
+        this.user_job = user_job;
         this.like = like;
         this.comments = comments;
     }
 
-    public TimelineUser(Long user_id, String timeline_description, String timeline_date, String timeline_time, String timeline_photo, String user_photo, String user_name, Long like, Long comments) {
+    public TimelineUser(Long user_id, String timeline_description, String timeline_date, String timeline_time, String timeline_photo, String user_photo, String user_name, String user_job, Long like, Long comments) {
         super(user_id, timeline_description, timeline_date, timeline_time, timeline_photo);
         this.user_photo = user_photo;
         this.user_name = user_name;
+        this.user_job = user_job;
         this.like = like;
         this.comments = comments;
+    }
+
+    public String getUser_job() {
+        return user_job;
+    }
+
+    public void setUser_job(String user_job) {
+        this.user_job = user_job;
     }
 
     public String getUser_photo() {

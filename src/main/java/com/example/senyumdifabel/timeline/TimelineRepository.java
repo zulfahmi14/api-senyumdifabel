@@ -3,6 +3,7 @@ import com.example.senyumdifabel.following.Following;
 //import com.example.senyumdifabel.people.People;
 //import com.example.senyumdifabel.likes.Likes;
 //import com.example.senyumdifabel.comment.Comment;
+import com.example.senyumdifabel.people.People;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,9 @@ public interface TimelineRepository  extends JpaRepository<Timeline,Long>  {
 
     @Query("select user_photo from People u where u.user_id = ?1")
     String FindPhoto(Long y);
+
+    @Query("select u from People u where u.user_id = ?1")
+    People FindUser(Long y);
 
     @Query("select COUNT (com) from Likes com where com.timeline_id = ?1")
     Long FindCountLike(Long y);

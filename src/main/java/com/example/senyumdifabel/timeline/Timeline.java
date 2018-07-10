@@ -19,9 +19,7 @@ public class Timeline {
     protected Long user_id;
     @Column(nullable = false)
     protected String timeline_description;
-    @Column(nullable = false)
     protected String timeline_date;
-    @Column(nullable = false)
     protected String timeline_time;
 
     protected String timeline_photo;

@@ -1,8 +1,10 @@
 package com.example.senyumdifabel.timeline;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.following.Following;
 import com.example.senyumdifabel.params.TimelineUser;
+import com.example.senyumdifabel.people.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,21 +37,31 @@ public class TimelineController {
         return timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
     }
 
+    @PutMapping("/auth/updateTimeline/{id}") // timeline_id
+    public Timeline updateCom(@PathVariable(value = "id") Long id, @RequestBody Timeline peoplenew){
+        Timeline peopleold = timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+        peopleold.setTimeline_description(peoplenew.getTimeline_description());
+        peopleold.setTimeline_photo(peoplenew.getTimeline_photo());
+        return timelineRepository.save(peopleold);
+    }
+
     @GetMapping("/auth/getMyTimeline/{id}")
     public List<TimelineUser> getMyTimeline(@PathVariable(value = "id") Long id){
         List<TimelineUser> x = new ArrayList<>();
         List<Timeline> temp ;
         temp = timelineRepository.findTimeline(id);
-        String name = timelineRepository.FindUserName(id);
-        String photo = timelineRepository.FindPhoto(id);
+        People people = timelineRepository.FindUser(id);
+        int size = people.getExperiences().size() ;
+        String job = people.getExperiences().get(size-1).getTitle() ;
         for(int j=0 ;j< temp.size() ; j++)
         {
             TimelineUser timeline = new TimelineUser() ;
 
             timeline.setComments(timelineRepository.FindCountComment(temp.get(j).getTimeline_id()));
             timeline.setLike(timelineRepository.FindCountLike(temp.get(j).getTimeline_id()));
-            timeline.setUser_name(name);
-            timeline.setUser_photo(photo);
+            timeline.setUser_name(people.getUser_name());
+            timeline.setUser_photo(people.getUser_photo());
+            timeline.setUser_job(job);
             timeline.setTimeline_date(temp.get(j).getTimeline_date());
             timeline.setTimeline_time(temp.get(j).getTimeline_time());
             timeline.setTimeline_photo(temp.get(j).getTimeline_photo());
@@ -80,8 +92,9 @@ public class TimelineController {
             }
             List<Timeline> temp ;
             temp = timelineRepository.findTimeline(y);
-            String name = timelineRepository.FindUserName(y);
-            String photo = timelineRepository.FindPhoto(y);
+            People people = timelineRepository.FindUser(id);
+            int size = people.getExperiences().size() ;
+            String job = people.getExperiences().get(size-1).getTitle() ;
 
             for(int j=0 ;j< temp.size() ; j++)
             {
@@ -89,10 +102,11 @@ public class TimelineController {
 
                 timeline.setComments(timelineRepository.FindCountComment(temp.get(j).getTimeline_id()));
                 timeline.setLike(timelineRepository.FindCountLike(temp.get(j).getTimeline_id()));
-                timeline.setUser_name(name);
-                timeline.setUser_photo(photo);
+                timeline.setUser_photo(people.getUser_photo());
+                timeline.setUser_name(people.getUser_name());
                 timeline.setTimeline_date(temp.get(j).getTimeline_date());
                 timeline.setTimeline_time(temp.get(j).getTimeline_time());
+                timeline.setUser_job(job);
                 timeline.setTimeline_photo(temp.get(j).getTimeline_photo());
                 timeline.setTimeline_description(temp.get(j).getTimeline_description());
                 timeline.setTimeline_id(temp.get(j).getTimeline_id());
