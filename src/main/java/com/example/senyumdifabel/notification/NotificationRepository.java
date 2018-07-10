@@ -34,4 +34,6 @@ public interface NotificationRepository extends JpaRepository< Notification, Lon
     @Query("select  u from People u where u.user_id = ?1")
     People findPeople(Long id) ;
 
+    @Query("select  COUNT (u) from Following u where u.user_id = ?1 and u.follow = ?2")
+    Long findFoll(Long id1 , Long id2) ; // 1 = kita sudah follow, 0 kita belum follow
 }

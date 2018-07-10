@@ -14,7 +14,6 @@ public class Notification {
 
     protected Long type ;
 
-    @Column(nullable = false)
     protected Boolean enable ; // false = belum dilihat, true = sudah dilihat
 
     @Column(nullable = false)
