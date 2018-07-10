@@ -68,7 +68,7 @@ public class PeopleController {
 //        peopleold.setUser_password(peoplenew.getUser_password());
         peopleold.setUser_address(peoplenew.getUser_address());
         peopleold.setUser_contact(peoplenew.getUser_contact());     //contact buat bio
-//        peopleold.setUser_photo(peoplenew.getUser_photo());
+        peopleold.setUser_photo(peoplenew.getUser_photo());
         return peopleRepository.save(peopleold);
     }
     @PutMapping("/auth/updatecv/{id}")
