@@ -21,10 +21,10 @@ public class BookmarkController {
         return bookmarkRepository.save(mark);
     }
 
-    @GetMapping("/auth/getBookmark/{id}")
-    public List<Bookmark> getBook(@PathVariable(value = "id") Long id){
-        return bookmarkRepository.findMark(id) ;
-    }
+//    @GetMapping("/auth/getBookmark/{id}")
+//    public List<Bookmark> getBook(@PathVariable(value = "id") Long id){
+//        return bookmarkRepository.findMark(id) ;
+//    }
 
     @PutMapping("/auth/updateBookmark/{id}")
     public Bookmark updatemark(@PathVariable(value = "id") Long id, @RequestBody Bookmark peoplenew){

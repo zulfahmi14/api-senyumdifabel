@@ -1,7 +1,9 @@
 package com.example.senyumdifabel.proposal;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.bookmark.Bookmark;
 import com.example.senyumdifabel.job.Job;
+import com.example.senyumdifabel.params.CountJob;
 import com.example.senyumdifabel.params.JobCompany;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,7 +80,7 @@ public class ProposalController {
         return send;
     }
 
-    //status = 1, Applied job
+    //status =3, Failed job
     @GetMapping("/auth/getFailed/{id}")
     public List<JobCompany> getFailed(@PathVariable(value = "id") Long id){
         List<JobCompany> send = new ArrayList<JobCompany>();
@@ -100,6 +102,43 @@ public class ProposalController {
         }
         return send;
     }
+
+
+    @GetMapping("/auth/countJob/{id}")
+    public CountJob countJob(@PathVariable(value = "id") Long id){
+        Long countBookmark = proposalRepository.countBookmark(id);
+        Long countAppliedJob = proposalRepository.countAppliedJob(id);
+        Long countInterview = proposalRepository.countInterview(id);
+        Long countFailed = proposalRepository.countFailed(id);
+
+        CountJob counter = new CountJob(countBookmark, countAppliedJob, countInterview, countFailed);
+        return counter;
+
+    }
+
+    //BOokmark
+    @GetMapping("/auth/getBookmark/{id}")
+    public List<JobCompany> getBookmark(@PathVariable(value = "id") Long id){
+        List<JobCompany> send = new ArrayList<JobCompany>();
+        List<Bookmark> c = proposalRepository.findBookmark(id);
+        for(int i = 0 ; i < c.size() ; i++)
+        {
+            Long idx = c.get(i).getJob_id();
+            Job job = proposalRepository.findJob(idx);
+            JobCompany temp = new JobCompany() ;
+            temp.setName(job.getName());
+            temp.setCompany_id(job.getCompany_id());
+            temp.setDate(job.getDate());
+            temp.setTime(job.getTime());
+            temp.setDescription(job.getDescription());
+            temp.setJob_id(c.get(i).getJob_id());
+            temp.setName(job.getName());
+            temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            send.add(temp);
+        }
+        return send;
+    }
+
 
 
     @PutMapping("/confirmProposal/{id}")
