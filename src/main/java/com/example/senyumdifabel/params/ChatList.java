@@ -8,22 +8,30 @@ public class ChatList {
     protected String photo ;
     protected String date ;
     protected String time ;
-    protected Long id_chat ;
+    protected Long sort_time ;
     protected  String prev_chat ;
     protected Long size ;
 
     public ChatList() {
     }
 
-    public ChatList(Long id_prev, String name, String photo, String date, String time, Long id_chat, String prev_chat, Long size) {
+    public ChatList(Long id_prev, String name, String photo, String date, String time, Long sort_time, String prev_chat, Long size) {
         this.id_prev = id_prev;
         this.name = name;
         this.photo = photo;
         this.date = date;
         this.time = time;
-        this.id_chat = id_chat;
+        this.sort_time = sort_time;
         this.prev_chat = prev_chat;
         this.size = size;
+    }
+
+    public Long getSort_time() {
+        return sort_time;
+    }
+
+    public void setSort_time(Long sort_time) {
+        this.sort_time = sort_time;
     }
 
     public Long getId_prev() {
@@ -66,14 +74,6 @@ public class ChatList {
         this.time = time;
     }
 
-    public Long getId_chat() {
-        return id_chat;
-    }
-
-    public void setId_chat(Long id_chat) {
-        this.id_chat = id_chat;
-    }
-
     public String getPrev_chat() {
         return prev_chat;
     }
@@ -90,10 +90,10 @@ public class ChatList {
         this.size = size;
     }
 
-    public static Comparator<ChatList> COMPARE_BY_ID_CHAT = new Comparator<ChatList>() {
+    public static Comparator<ChatList> COMPARE_BY_SORT_TIME = new Comparator<ChatList>() {
         @Override
         public int compare(ChatList chatList, ChatList t1) {
-            return chatList.id_chat.compareTo(t1.id_chat);
+            return chatList.sort_time.compareTo(t1.sort_time);
         }
     };
 }

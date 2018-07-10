@@ -23,16 +23,27 @@ public class Chat {
     @Column (nullable = false)
     protected String time ;
 
+    @Column (nullable = false)
+    protected Long sort_time ;
+
     public Chat() {
     }
 
-    public Chat(Long id, Long id_prev, Long sender, String message, String date, String time) {
-        this.id = id;
+    public Chat(Long id_prev, Long sender, String message, String date, String time, Long sort_time) {
         this.id_prev = id_prev;
         this.sender = sender;
         this.message = message;
         this.date = date;
         this.time = time;
+        this.sort_time = sort_time;
+    }
+
+    public Long getSort_time() {
+        return sort_time;
+    }
+
+    public void setSort_time(Long sort_time) {
+        this.sort_time = sort_time;
     }
 
     public Long getId_prev() {

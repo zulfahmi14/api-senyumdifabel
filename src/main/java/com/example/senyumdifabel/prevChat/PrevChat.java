@@ -25,25 +25,25 @@ public class PrevChat {
 
     protected String prev_chat;
 
-    protected Long id_chat ;
+    protected Long sort_time ;
 
     public PrevChat(){}
 
-    public PrevChat(Long peopleA, Long peopleB, String date, String time, String prev_chat, Long id_chat) {
+    public PrevChat(Long peopleA, Long peopleB, String date, String time, String prev_chat, Long sort_time) {
         this.peopleA = peopleA;
         this.peopleB = peopleB;
         this.date = date;
         this.time = time;
         this.prev_chat = prev_chat;
-        this.id_chat = id_chat;
+        this.sort_time = sort_time;
     }
 
-    public Long getId_chat() {
-        return id_chat;
+    public Long getSort_time() {
+        return sort_time;
     }
 
-    public void setId_chat(Long id_chat) {
-        this.id_chat = id_chat;
+    public void setSort_time(Long sort_time) {
+        this.sort_time = sort_time;
     }
 
     public Long getId() {

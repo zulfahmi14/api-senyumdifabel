@@ -26,7 +26,7 @@ public class GroupsController {
     @PostMapping("/auth/sendMessageGroup")
     public Groups sendMessage(@RequestBody Groups group){
         PrevGroup prev = groupsRepository.findPrev(group.getId_prev());
-        //prev.setId_chat();configure .htaccess in tomcat
+        prev.setSort_time(group.getSort_time());
         prev.setPrev_chat(group.getMessage());
         prev.setDate(group.getDate());
         prev.setTime(group.getTime());

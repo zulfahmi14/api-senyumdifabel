@@ -32,7 +32,7 @@ public class PrevGroup {
 
     protected  String photo ;
 
-    protected Long id_chat ;
+    protected Long sort_time ;
 
 //    @Column (nullable = false)
 //    protected Long user_id ;
@@ -40,21 +40,21 @@ public class PrevGroup {
     public PrevGroup() {
     }
 
-    public PrevGroup(String group_name, String date, String time, String prev_chat, String photo, long id_chat) {
+    public PrevGroup(String group_name, String date, String time, String prev_chat, String photo, Long sort_time) {
         this.group_name = group_name;
         this.date = date;
         this.time = time;
         this.prev_chat = prev_chat;
         this.photo = photo;
-        this.id_chat = id_chat;
+        this.sort_time = sort_time;
     }
 
-    public Long getId_chat() {
-        return id_chat;
+    public Long getSort_time() {
+        return sort_time;
     }
 
-    public void setId_chat(Long id_chat) {
-        this.id_chat = id_chat;
+    public void setSort_time(Long sort_time) {
+        this.sort_time = sort_time;
     }
 
     public Long getId_prev() {

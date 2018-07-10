@@ -23,16 +23,26 @@ public class Groups {
     @Column (nullable = false)
     protected String time ;
 
+    protected Long sort_time ;
+
     public Groups() {
     }
 
-    public Groups(Long id, Long sender, Long id_prev, String message, String date, String time) {
-        this.id = id;
+    public Groups(Long sender, Long id_prev, String message, String date, String time, Long sort_time) {
         this.sender = sender;
         this.id_prev = id_prev;
         this.message = message;
         this.date = date;
         this.time = time;
+        this.sort_time = sort_time;
+    }
+
+    public Long getSort_time() {
+        return sort_time;
+    }
+
+    public void setSort_time(Long sort_time) {
+        this.sort_time = sort_time;
     }
 
     public Long getSender() {

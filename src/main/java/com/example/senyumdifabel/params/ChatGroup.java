@@ -15,11 +15,11 @@ public class ChatGroup extends Groups {
     }
 
     public ChatGroup(Groups x) {
-        super(x.getId(), x.getSender(), x.getId_prev(), x.getMessage(), x.getDate(), x.getTime());
+        super(x.getSender(), x.getId_prev(), x.getMessage(), x.getDate(), x.getTime(), x.getSort_time());
     }
 
-    public ChatGroup(Long id, Long sender, Long id_prev, String message, String date, String time, String name, String photo) {
-        super(id, sender, id_prev, message, date, time);
+    public ChatGroup(Long sender, Long id_prev, String message, String date, String time, Long sort_time, String name, String photo) {
+        super(sender, id_prev, message, date, time, sort_time);
         this.name = name;
         this.photo = photo;
     }

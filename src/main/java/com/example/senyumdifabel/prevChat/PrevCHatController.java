@@ -56,7 +56,7 @@ public class PrevCHatController {
             temp.setPhoto(_people.getUser_photo());
             temp.setDate(chat.get(i).getDate());
             temp.setTime(chat.get(i).getTime());
-            temp.setId_chat(chat.get(i).getId_chat());
+            temp.setSort_time(chat.get(i).getSort_time());
             temp.setPrev_chat(chat.get(i).getPrev_chat());
             temp.setSize(1L);
             chatgroup.add(temp);
@@ -70,12 +70,12 @@ public class PrevCHatController {
             temp.setPhoto(group.get(i).getPhoto());
             temp.setDate(group.get(i).getDate());
             temp.setTime(group.get(i).getTime());
-            temp.setId_chat(group.get(i).getId_chat());
+            temp.setSort_time(group.get(i).getSort_time());
             temp.setPrev_chat(group.get(i).getPrev_chat());
             temp.setSize(prevChatRepository.findCountMember(group.get(i).getId_prev()));
             chatgroup.add(temp);
         }
-        Collections.sort( chatgroup , ChatList.COMPARE_BY_ID_CHAT );
+        Collections.sort( chatgroup , ChatList.COMPARE_BY_SORT_TIME );
         return chatgroup ;
     }
 

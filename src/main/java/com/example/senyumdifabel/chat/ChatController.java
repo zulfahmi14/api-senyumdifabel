@@ -23,7 +23,7 @@ public class ChatController {
     @PostMapping("/auth/sendMessage")
     public Chat sendMessage(@RequestBody Chat chat){
         PrevChat prev = chatRepository.findPrev(chat.getId_prev());
-        //prev.setId_chat();configure .htaccess in tomcat
+        prev.setSort_time(chat.getSort_time());
         prev.setPrev_chat(chat.getMessage());
         prev.setDate(chat.getDate());
         prev.setTime(chat.getTime());
