@@ -32,37 +32,35 @@ public class FileController {
     }
 
     @PostMapping("/auth/uploadFile") //awalan
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    public String uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/auth/downloadFile/")
                 .path(fileName)
                 .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
+        return fileDownloadUri ;
     }
-    @PostMapping("/auth/uploadTimeline")     //foto timeline
-    public UploadFileResponse uploadTimeline(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeTimeline(file);
+//    @PostMapping("/auth/uploadTimeline")     //foto timeline
+//    public UploadFileResponse uploadTimeline(@RequestParam("file") MultipartFile file) {
+//        String fileName = fileStorageService.storeTimeline(file);
+//
+//        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                .path("/auth/downloadFile/ ")
+//                .path(fileName)
+//                .toUriString();
+//
+//        return new UploadFileResponse(fileName, fileDownloadUri,
+//                file.getContentType(), file.getSize());
+//    }
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/timeline")
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
-    }
-
-    @PostMapping("/auth/uploadMultipleFiles")    //
-    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-        return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
-    }
+//    @PostMapping("/auth/uploadMultipleFiles")    //
+//    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+//        return Arrays.asList(files)
+//                .stream()
+//                .map(file -> uploadFile(file))
+//                .collect(Collectors.toList());
+//    }
 
     @GetMapping("/auth/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {

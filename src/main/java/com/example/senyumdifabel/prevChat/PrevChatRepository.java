@@ -14,7 +14,10 @@ public interface PrevChatRepository  extends JpaRepository<PrevChat,Long> {
     List<PrevChat> findMyChat(Long idx);
 
     @Query("select u from PrevGroup u where u.id_prev = ?1")
-    List<PrevGroup> findMyGroup(Long idx);
+    PrevGroup findMyGroup(Long idx);
+
+    @Query("select u.id_prev from UserGroup u where u.user_id = ?1")
+    List<Long> findGroupId(Long idx);
 
     @Query("select u from People u where u.user_id = ?1")
     People findPeople(Long idx);

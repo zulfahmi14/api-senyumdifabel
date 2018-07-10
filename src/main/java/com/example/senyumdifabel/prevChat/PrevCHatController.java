@@ -24,11 +24,21 @@ public class PrevCHatController {
         return prevChatRepository.save(prevChat);
     }
 
-    @GetMapping("/auth/listChat/{id}")
+    @GetMapping("/auth/listChat/{id}") // user_id
     public List<ChatList> listChat(@PathVariable(value ="id") Long x){
         List<ChatList> chatgroup = new ArrayList<>() ;
+
         List<PrevChat> chat = prevChatRepository.findMyChat(x);
-        List<PrevGroup> group = prevChatRepository.findMyGroup(x);
+        List<Long> group_id = prevChatRepository.findGroupId(x);
+        List<PrevGroup> group = new ArrayList<>();
+
+        // find group by id
+        for(int i = 0 ; i < group_id.size() ; i++)
+        {
+            PrevGroup temp2 = prevChatRepository.findMyGroup(group_id.get(i));
+            group.add(temp2);
+        }
+
         for(int i = 0 ; i < chat.size() ; i++)
         {
             ChatList temp = new ChatList();
@@ -51,6 +61,7 @@ public class PrevCHatController {
             temp.setSize(1L);
             chatgroup.add(temp);
         }
+
         for(int i = 0 ; i < group.size() ; i++)
         {
             ChatList temp = new ChatList();
