@@ -32,23 +32,42 @@ public class TimelineController {
         return timelineRepository.findAll();
     }
 
-    @GetMapping("/auth/getTimeline/{id}")
-    public TimelineUser getTimeline(@PathVariable(value = "id") Long id){
-        Timeline timeline = timelineRepository.findId(id);
-        TimelineUser send = new TimelineUser();
-        People people = timelineRepository.FindUser(timeline.getUser_id()) ;
-        List<Experience> ex = timelineRepository.FindEx(timeline.getUser_id()) ;
-        String job ;
-        if(ex.size()<1)
-            job = "" ;
-        else
-            job = ex.get(ex.size()-1).getTitle() ;
+//    @GetMapping("/auth/getTimeline/{id}")
+//    public TimelineUser getTimeline(@PathVariable(value = "id") Long id){
+//        Timeline timeline = timelineRepository.findId(id);
+//        TimelineUser send = new TimelineUser();
+//        People people = timelineRepository.FindUser(timeline.getUser_id()) ;
+//        List<Experience> ex = timelineRepository.FindEx(timeline.getUser_id()) ;
+//        String job ;
+//        if(ex.size()<1)
+//            job = "" ;
+//        else
+//            job = ex.get(ex.size()-1).getTitle() ;
+//
+//        send.setComments(timelineRepository.FindCountComment(id));
+//        send.setLike(timelineRepository.FindCountLike(id));
+//        send.setUser_name(people.getUser_name());
+//        send.setUser_photo(people.getUser_photo());
+//        send.setUser_job(job);
+//        send.setTimeline_date(timeline.getTimeline_date());
+//        send.setTimeline_time(timeline.getTimeline_time());
+//        send.setTimeline_photo(timeline.getTimeline_photo());
+//        send.setTimeline_description(timeline.getTimeline_description());
+//        send.setTimeline_id(timeline.getTimeline_id());
+//        send.setUser_id(timeline.getUser_id());
+//        return send;
+//    }
 
+    @GetMapping("/auth/getTimeline/{id}")
+    public TimelineUser getuser(@PathVariable(value = "id") Long id){
+        Timeline timeline =  timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+        TimelineUser send = new TimelineUser() ;
+        People people = timelineRepository.FindUser(timeline.getUser_id()) ;
         send.setComments(timelineRepository.FindCountComment(id));
         send.setLike(timelineRepository.FindCountLike(id));
         send.setUser_name(people.getUser_name());
         send.setUser_photo(people.getUser_photo());
-        send.setUser_job(job);
+        send.setUser_job("pengangguran");
         send.setTimeline_date(timeline.getTimeline_date());
         send.setTimeline_time(timeline.getTimeline_time());
         send.setTimeline_photo(timeline.getTimeline_photo());
@@ -109,7 +128,7 @@ public class TimelineController {
         {
             Long y ;
             if(i<Follow.size())
-                y = Follow.get(i).getUser_id();
+                y = Follow.get(i).getFollow();
             else
                 y = id ;
 
