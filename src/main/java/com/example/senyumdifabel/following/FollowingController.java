@@ -3,6 +3,7 @@ package com.example.senyumdifabel.following;
 import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.params.NamePhoto;
 import com.example.senyumdifabel.params.Params;
+import com.example.senyumdifabel.people.People;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,10 +39,11 @@ public class FollowingController {
         {
             Long idx = c.get(i).getFollow();
             NamePhoto temp = new NamePhoto();
-            temp.setUser_id(c.get(i).getUser_id());
-            temp.setUser_name(followingRepository.findUserName(idx));
-            temp.setUser_photo(followingRepository.findUserPhoto(idx));
-            temp.setUser_job(followingRepository.findJob(idx).get(0).getTitle());
+            People x = followingRepository.findPeople(idx);
+            temp.setUser_id(idx);
+            temp.setUser_name(x.getUser_name());
+            temp.setUser_photo(x.getUser_photo());
+            temp.setUser_job(x.getUser_job());
             send.add(temp);
         }
         return send;
@@ -55,10 +57,11 @@ public class FollowingController {
         {
             Long idx = c.get(i).getFollow();
             NamePhoto temp = new NamePhoto();
-            temp.setUser_id(c.get(i).getUser_id());
-            temp.setUser_name(followingRepository.findUserName(idx));
-            temp.setUser_photo(followingRepository.findUserPhoto(idx));
-            temp.setUser_job(followingRepository.findJob(idx).get(0).getTitle());
+            People x = followingRepository.findPeople(idx);
+            temp.setUser_id(idx);
+            temp.setUser_photo(x.getUser_photo());
+            temp.setUser_job(x.getUser_job());
+            temp.setUser_name(x.getUser_name());
             send.add(temp);
         }
         return send;
