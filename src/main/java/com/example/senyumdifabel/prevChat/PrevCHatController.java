@@ -26,11 +26,8 @@ public class PrevCHatController {
     }
 
     @PostMapping("/auth/checkRoom")
-    public Boolean check(@RequestBody Params p){
-        if(prevChatRepository.findRoom(p.getParam1(), p.getParam2())>0)
-            return true ;
-        else
-            return false ;
+    public PrevChat check(@RequestBody Params p){
+        return prevChatRepository.findRoom(p.getParam1(), p.getParam2()) ;
     }
 
     @GetMapping("/auth/listChat/{id}") // user_id

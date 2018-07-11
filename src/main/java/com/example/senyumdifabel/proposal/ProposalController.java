@@ -41,19 +41,32 @@ public class ProposalController {
     public List<JobCompany> getApplied(@PathVariable(value = "id") Long id){
         List<JobCompany> send = new ArrayList<JobCompany>();
         List<Proposal> c = proposalRepository.findAppliedJob(id);
+        List<Bookmark> mark = proposalRepository.findBookmark(id);
         for(int i = 0 ; i < c.size() ; i++)
         {
             Long idx = c.get(i).getJob_id();
             Job job = proposalRepository.findJob(idx);
             JobCompany temp = new JobCompany() ;
             temp.setName(job.getName());
-            temp.setCompany_id(job.getCompany_id());
-            temp.setDate(job.getDate());
             temp.setTime(job.getTime());
             temp.setDescription(job.getDescription());
+            temp.setCompany_id(job.getCompany_id());
+            temp.setDate(job.getDate());
             temp.setJob_id(c.get(i).getJob_id());
             temp.setName(job.getName());
             temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            //bookmark
+            temp.setFlag_bookmark(0L);
+            for (int j = 0; j < mark.size() ; j++){
+                if(c.get(i).getJob_id() == mark.get(j).getJob_id()){
+                    temp.setFlag_bookmark(1L);
+                    break;
+                }
+                else{
+                    temp.setFlag_bookmark(0L);
+                }
+            }
+
             send.add(temp);
         }
         return send;
@@ -63,6 +76,7 @@ public class ProposalController {
     @GetMapping("/auth/getInterview/{id}") //user id
     public List<JobCompany> getInterview(@PathVariable(value = "id") Long id){
         List<JobCompany> send = new ArrayList<JobCompany>();
+        List<Bookmark> mark = proposalRepository.findBookmark(id);
         List<Proposal> c = proposalRepository.findInterview(id);
         for(int i = 0 ; i < c.size() ; i++)
         {
@@ -77,6 +91,17 @@ public class ProposalController {
             temp.setJob_id(c.get(i).getJob_id());
             temp.setName(job.getName());
             temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            //bookmark
+            temp.setFlag_bookmark(0L);
+            for (int j = 0; j < mark.size() ; j++){
+                if(c.get(i).getJob_id() == mark.get(j).getJob_id()){
+                    temp.setFlag_bookmark(1L);
+                    break;
+                }
+                else{
+                    temp.setFlag_bookmark(0L);
+                }
+            }
             send.add(temp);
         }
         return send;
@@ -87,19 +112,31 @@ public class ProposalController {
     public List<JobCompany> getFailed(@PathVariable(value = "id") Long id){
         List<JobCompany> send = new ArrayList<JobCompany>();
         List<Proposal> c = proposalRepository.findFailed(id);
+        List<Bookmark> mark = proposalRepository.findBookmark(id);
         for(int i = 0 ; i < c.size() ; i++)
         {
             Long idx = c.get(i).getJob_id();
             Job job = proposalRepository.findJob(idx);
             JobCompany temp = new JobCompany() ;
             temp.setName(job.getName());
+            temp.setJob_id(c.get(i).getJob_id());
             temp.setCompany_id(job.getCompany_id());
             temp.setDate(job.getDate());
             temp.setTime(job.getTime());
             temp.setDescription(job.getDescription());
-            temp.setJob_id(c.get(i).getJob_id());
             temp.setName(job.getName());
             temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            //bookmark
+            temp.setFlag_bookmark(0L);
+            for (int j = 0; j < mark.size() ; j++){
+                if(c.get(i).getJob_id() == mark.get(j).getJob_id()){
+                    temp.setFlag_bookmark(1L);
+                    break;
+                }
+                else{
+                    temp.setFlag_bookmark(0L);
+                }
+            }
             send.add(temp);
         }
         return send;
@@ -132,10 +169,11 @@ public class ProposalController {
             temp.setCompany_id(job.getCompany_id());
             temp.setDate(job.getDate());
             temp.setTime(job.getTime());
+            temp.setName(job.getName());
             temp.setDescription(job.getDescription());
             temp.setJob_id(c.get(i).getJob_id());
-            temp.setName(job.getName());
             temp.setCompany_name(proposalRepository.findCompanyName(job.getCompany_id()));
+            temp.setFlag_bookmark(1L);
             send.add(temp);
         }
         return send;

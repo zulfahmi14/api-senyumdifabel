@@ -45,5 +45,4 @@ public interface ProposalRepository extends JpaRepository< Proposal, Long> {
 
     @Query("select count(u) from Proposal u where u.user_id=?1 and u.status=3")
     Long countFailed(Long user_id);
-
 }
