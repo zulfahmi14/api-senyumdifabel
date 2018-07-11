@@ -67,7 +67,7 @@ public class TimelineController {
         send.setLike(timelineRepository.FindCountLike(id));
         send.setUser_name(people.getUser_name());
         send.setUser_photo(people.getUser_photo());
-        send.setUser_job("pengangguran");
+        send.setUser_job(people.getUser_job());
         send.setTimeline_date(timeline.getTimeline_date());
         send.setTimeline_time(timeline.getTimeline_time());
         send.setTimeline_photo(timeline.getTimeline_photo());
@@ -91,13 +91,6 @@ public class TimelineController {
         List<Timeline> temp ;
         temp = timelineRepository.findTimeline(id);
         People people = timelineRepository.FindUser(id) ;
-        List<Experience> ex = timelineRepository.FindEx(id) ;
-        String job ;
-        if(ex.size()<1)
-            job = "" ;
-        else
-            job = ex.get(ex.size()-1).getTitle() ;
-
         for(int j=0 ;j< temp.size() ; j++)
         {
             TimelineUser timeline = new TimelineUser() ;
@@ -106,7 +99,7 @@ public class TimelineController {
             timeline.setLike(timelineRepository.FindCountLike(temp.get(j).getTimeline_id()));
             timeline.setUser_name(people.getUser_name());
             timeline.setUser_photo(people.getUser_photo());
-            timeline.setUser_job(job);
+            timeline.setUser_job(people.getUser_job());
             timeline.setTimeline_date(temp.get(j).getTimeline_date());
             timeline.setTimeline_time(temp.get(j).getTimeline_time());
             timeline.setTimeline_photo(temp.get(j).getTimeline_photo());
@@ -135,13 +128,6 @@ public class TimelineController {
             List<Timeline> temp ;
             temp = timelineRepository.findTimeline(y);
             People people = timelineRepository.FindUser(y) ;
-            List<Experience> ex = timelineRepository.FindEx(y) ;
-            String job = new String();
-            if(ex.size()<1)
-                job = "" ;
-            else
-                job = ex.get(ex.size()-1).getTitle() ;
-
             for(int j=0 ;j< temp.size() ; j++)
             {
                 TimelineUser timeline = new TimelineUser() ;
@@ -152,7 +138,7 @@ public class TimelineController {
                 timeline.setUser_name(people.getUser_name());
                 timeline.setTimeline_date(temp.get(j).getTimeline_date());
                 timeline.setTimeline_time(temp.get(j).getTimeline_time());
-                timeline.setUser_job(job);
+                timeline.setUser_job(people.getUser_job());
                 timeline.setTimeline_photo(temp.get(j).getTimeline_photo());
                 timeline.setTimeline_description(temp.get(j).getTimeline_description());
                 timeline.setTimeline_id(temp.get(j).getTimeline_id());

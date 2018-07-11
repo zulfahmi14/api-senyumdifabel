@@ -44,8 +44,8 @@ public class ProfileUser extends People {
 
     public ProfileUser(){}
 
-    public ProfileUser(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, String cv, Long count_follower, Long count_following, List<Experience> experiences, List<Education> educations, List<Skill> skills, List<Achievement> achievements, List<Contact> contacts, List<TimelineUser> timelineUsers) {
-        super(user_name, user_email, user_password, user_address, user_photo, user_contact, cv);
+    public ProfileUser(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, String cv, String user_job, Long count_follower, Long count_following, List<Experience> experiences, List<Education> educations, List<Skill> skills, List<Achievement> achievements, List<Contact> contacts, List<TimelineUser> timelineUsers) {
+        super(user_name, user_email, user_password, user_address, user_photo, user_contact, cv, user_job);
         this.count_follower = count_follower;
         this.count_following = count_following;
     }
