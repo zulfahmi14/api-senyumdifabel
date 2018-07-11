@@ -55,7 +55,7 @@ public class FollowingController {
         List<Following> c = followingRepository.findFollower(id);
         for(int i = 0 ; i < c.size() ; i++)
         {
-            Long idx = c.get(i).getFollow();
+            Long idx = c.get(i).getUser_id();
             NamePhoto temp = new NamePhoto();
             People x = followingRepository.findPeople(idx);
             temp.setUser_id(idx);
