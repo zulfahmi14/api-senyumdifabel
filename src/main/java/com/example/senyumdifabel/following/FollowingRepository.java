@@ -23,4 +23,7 @@ public interface FollowingRepository extends JpaRepository<Following, Long> {
 
     @Query("select u.title, u.description from Experience u where u.user_id = ?1 order by u.id desc")
     List<Experience> findJob(Long user_id);
+
+    @Query("select u from Following u where u.user_id=?1 and u.follow=?2")
+    Following findDelete(Long user_id, Long follow);
 }

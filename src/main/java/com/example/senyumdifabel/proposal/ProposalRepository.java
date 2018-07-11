@@ -25,13 +25,13 @@ public interface ProposalRepository extends JpaRepository< Proposal, Long> {
     @Query("select u from Bookmark u where u.user_id=?1")
     List<Bookmark> findBookmark(Long user_id);
 
-    @Query("select u, count(u) as counter from Proposal u where u.user_id=?1 and u.status=1")
+    @Query("select u from Proposal u where u.user_id=?1 and u.status=1")
     List<Proposal> findAppliedJob(Long user_id);
 
-    @Query("select u, count(u) as counter from Proposal u where u.user_id=?1 and u.status=2")
+    @Query("select u from Proposal u where u.user_id=?1 and u.status=2")
     List<Proposal> findInterview(Long user_id);
 
-    @Query("select u, count(u) as counter from Proposal u where u.user_id=?1 and u.status=3")
+    @Query("select u from Proposal u where u.user_id=?1 and u.status=3")
     List<Proposal> findFailed(Long user_id);
 
     @Query("select count (u) from Bookmark u where u.user_id=?1")

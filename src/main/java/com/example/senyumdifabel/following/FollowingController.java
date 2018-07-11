@@ -2,6 +2,7 @@ package com.example.senyumdifabel.following;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.params.NamePhoto;
+import com.example.senyumdifabel.params.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class FollowingController {
         this.followingRepository = followingRepository;
     }
 
-    @PostMapping("/auth/following")
+        @PostMapping("/auth/following")
     public Following addFollow(@RequestBody Following fol){
         return followingRepository.save(fol);
     }
@@ -71,10 +72,20 @@ public class FollowingController {
         return followingRepository.save(peopleold);
     }
 
-    @DeleteMapping("/auth/deleteFollowing/{id}")
-    public boolean deleteFollowing(@PathVariable(value = "id") Long id) {
-        Following people = followingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
-        followingRepository.delete(people);
-        return true;
+    @PostMapping("/auth/deleteFollowing")
+    public boolean deleteuser(@RequestBody Params x) {
+        Long x1 = x.getParam1() ;
+        Long x2 = x.getParam2() ;
+        Following leave = followingRepository.findDelete(x1,x2);
+        if(leave == null)
+        {
+            return false ;
+        }
+        else
+        {
+            followingRepository.delete(leave);
+            return true ;
+        }
+
     }
 }
