@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JobRepository extends JpaRepository< Job, Long> {
-//    @Query("select u from Job u where u.user_id = ?1")
-//    List<Job> findJob(Long user_id);
+    @Query("select u from Job u where u.job_id = ?1")
+    Job findJob(Long job_id);
 
     @Query("select u from Company u where u.user_id=?1")
     String findCompanyName(Long user_id);
