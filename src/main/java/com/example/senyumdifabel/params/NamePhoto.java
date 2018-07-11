@@ -5,14 +5,16 @@ public class NamePhoto {
     protected String user_name;
     protected String user_photo;
     protected String user_job;
+    protected Boolean statusFollow;
 
     public NamePhoto(){}
 
-    public NamePhoto(Long user_id, String user_name, String user_photo, String user_job) {
+    public NamePhoto(Long user_id, String user_name, String user_photo, String user_job, Boolean statusFollow) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.user_photo = user_photo;
         this.user_job = user_job;
+        this.statusFollow = statusFollow;
     }
 
     public Long getUser_id() {
@@ -45,5 +47,13 @@ public class NamePhoto {
 
     public void setUser_job(String user_job) {
         this.user_job = user_job;
+    }
+
+    public Boolean getStatusFollow() {
+        return statusFollow;
+    }
+
+    public void setStatusFollow(Boolean statusFollow) {
+        this.statusFollow = statusFollow;
     }
 }

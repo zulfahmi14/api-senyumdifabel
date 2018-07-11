@@ -2,6 +2,7 @@ package com.example.senyumdifabel.skill;
 
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class SkillController {
     private SkillRepository skillRepository ;
 
+    @Autowired
     public SkillController(SkillRepository skillRepository) {
         this.skillRepository = skillRepository;
     }

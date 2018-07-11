@@ -1,6 +1,8 @@
 package com.example.senyumdifabel.chat;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.flagChat.FlagChat;
+import com.example.senyumdifabel.flagChat.FlagChatRepository;
 import com.example.senyumdifabel.prevChat.PrevChat;
 import com.example.senyumdifabel.prevChat.PrevChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,13 @@ import java.util.List;
 public class ChatController {
     private ChatRepository chatRepository ;
     private PrevChatRepository prevChatRepository ;
+    private FlagChatRepository flagChatRepository ;
 
     @Autowired
-    public ChatController(ChatRepository chatRepository, PrevChatRepository prevChatRepository) {
+    public ChatController(ChatRepository chatRepository, PrevChatRepository prevChatRepository, FlagChatRepository flagChatRepository) {
         this.chatRepository = chatRepository;
         this.prevChatRepository = prevChatRepository;
+        this.flagChatRepository = flagChatRepository;
     }
 
     @PostMapping("/auth/sendMessage")
@@ -28,6 +32,17 @@ public class ChatController {
         prev.setDate(chat.getDate());
         prev.setTime(chat.getTime());
         prevChatRepository.save(prev);
+
+        FlagChat flagChat = new FlagChat();
+        flagChat.setId_prev(chat.getId_prev());
+        flagChat.setFlag(false);
+        flagChat.setType(1L);
+        if(chat.getSender() == prev.getPeopleA())
+            flagChat.setUser_id(prev.getPeopleB());
+        else
+            flagChat.setUser_id(prev.getPeopleB());
+        flagChatRepository.save(flagChat);
+
         return chatRepository.save(chat);
     }
 

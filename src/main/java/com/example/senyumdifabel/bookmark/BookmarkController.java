@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.bookmark;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.params.Params;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class BookmarkController {
         }
         else
         {
-            followingRepository.delete(leave);
+            bookmarkRepository.delete(leave);
             return true ;
         }
 

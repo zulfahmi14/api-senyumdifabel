@@ -74,14 +74,6 @@ public class PrevGroup {
         this.peoples = peoples;
     }
 
-    public Long getId() {
-        return id_prev;
-    }
-
-    public void setId(Long id) {
-        this.id_prev = id;
-    }
-
     public String getGroup_name() {
         return group_name;
     }

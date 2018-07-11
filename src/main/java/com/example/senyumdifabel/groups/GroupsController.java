@@ -1,6 +1,8 @@
 package com.example.senyumdifabel.groups;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.flagChat.FlagChat;
+import com.example.senyumdifabel.flagChat.FlagChatRepository;
 import com.example.senyumdifabel.params.ChatGroup;
 import com.example.senyumdifabel.people.People;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
@@ -16,11 +18,13 @@ import java.util.List;
 public class GroupsController {
     private GroupsRepository groupsRepository ;
     private PrevGroupRepository prevGroupRepository ;
+    private FlagChatRepository flagChatRepository ;
 
     @Autowired
-    public GroupsController(GroupsRepository groupsRepository, PrevGroupRepository prevGroupRepository) {
+    public GroupsController(GroupsRepository groupsRepository, PrevGroupRepository prevGroupRepository, FlagChatRepository flagChatRepository) {
         this.groupsRepository = groupsRepository;
         this.prevGroupRepository = prevGroupRepository;
+        this.flagChatRepository = flagChatRepository;
     }
 
     @PostMapping("/auth/sendMessageGroup")
@@ -31,6 +35,18 @@ public class GroupsController {
         prev.setDate(group.getDate());
         prev.setTime(group.getTime());
         prevGroupRepository.save(prev);
+
+        // flag flagChat
+        List<People> p = groupsRepository.findMember(group.getId_prev());
+        for(int i=0 ; i<p.size() ; i++)
+        {
+            FlagChat flagChat = new FlagChat();
+            flagChat.setId_prev(group.getId_prev());
+            flagChat.setFlag(false);
+            flagChat.setType(2L);
+            flagChat.setUser_id(p.get(i).getUser_id());
+            flagChatRepository.save(flagChat);
+        }
         return groupsRepository.save(group);
     }
 

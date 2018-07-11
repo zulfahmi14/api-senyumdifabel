@@ -14,12 +14,22 @@ public class Following {
     @Column(nullable = false)
     protected Long follow ;
 
+    protected Boolean statusFollow ;
 
     public Following(){}
 
-    public Following(Long user_id, Long follow) {
+    public Following(Long user_id, Long follow, Boolean statusFollow) {
         this.user_id = user_id;
         this.follow = follow;
+        this.statusFollow = statusFollow;
+    }
+
+    public Boolean getStatusFollow() {
+        return statusFollow;
+    }
+
+    public void setStatusFollow(Boolean statusFollow) {
+        this.statusFollow = statusFollow;
     }
 
     public Long getId() {

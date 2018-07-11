@@ -11,11 +11,12 @@ public class ChatList {
     protected Long sort_time ;
     protected  String prev_chat ;
     protected Long size ;
+    protected Long unread ;
 
     public ChatList() {
     }
 
-    public ChatList(Long id_prev, String name, String photo, String date, String time, Long sort_time, String prev_chat, Long size) {
+    public ChatList(Long id_prev, String name, String photo, String date, String time, Long sort_time, String prev_chat, Long size, Long unread) {
         this.id_prev = id_prev;
         this.name = name;
         this.photo = photo;
@@ -24,6 +25,23 @@ public class ChatList {
         this.sort_time = sort_time;
         this.prev_chat = prev_chat;
         this.size = size;
+        this.unread = unread;
+    }
+
+    public Long getUnread() {
+        return unread;
+    }
+
+    public void setUnread(Long unread) {
+        this.unread = unread;
+    }
+
+    public static Comparator<ChatList> getCompareBySortTime() {
+        return COMPARE_BY_SORT_TIME;
+    }
+
+    public static void setCompareBySortTime(Comparator<ChatList> compareBySortTime) {
+        COMPARE_BY_SORT_TIME = compareBySortTime;
     }
 
     public Long getSort_time() {

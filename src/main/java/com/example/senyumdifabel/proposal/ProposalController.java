@@ -5,6 +5,7 @@ import com.example.senyumdifabel.bookmark.Bookmark;
 import com.example.senyumdifabel.job.Job;
 import com.example.senyumdifabel.params.CountJob;
 import com.example.senyumdifabel.params.JobCompany;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ProposalController {
     private ProposalRepository proposalRepository ;
 
+    @Autowired
     public ProposalController(ProposalRepository proposalRepository) {
         this.proposalRepository = proposalRepository;
     }

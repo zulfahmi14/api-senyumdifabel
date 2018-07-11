@@ -59,6 +59,7 @@ public class PrevCHatController {
             temp.setSort_time(chat.get(i).getSort_time());
             temp.setPrev_chat(chat.get(i).getPrev_chat());
             temp.setSize(1L);
+            temp.setUnread(prevChatRepository.countFlagChat(x, chat.get(i).getId()));
             chatgroup.add(temp);
         }
 
@@ -73,6 +74,7 @@ public class PrevCHatController {
             temp.setSort_time(group.get(i).getSort_time());
             temp.setPrev_chat(group.get(i).getPrev_chat());
             temp.setSize(prevChatRepository.findCountMember(group.get(i).getId_prev()));
+            temp.setUnread(prevChatRepository.countFlagGroup(x, group.get(i).getId_prev()));
             chatgroup.add(temp);
         }
         Collections.sort( chatgroup , ChatList.COMPARE_BY_SORT_TIME );

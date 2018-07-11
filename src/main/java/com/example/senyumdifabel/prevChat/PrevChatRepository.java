@@ -25,4 +25,10 @@ public interface PrevChatRepository  extends JpaRepository<PrevChat,Long> {
     @Query("select COUNT (u.user_id) from UserGroup u where u.id_prev = ?1")
     Long findCountMember(Long id);
 
+    @Query("select COUNT (com) from FlagChat com where com.user_id = ?1 and com.id_prev = ?2 and com.flag = false and com.type = 2L")
+    Long countFlagGroup(Long x, Long y);
+
+    @Query("select COUNT (com) from FlagChat com where com.user_id = ?1 and com.id_prev = ?2 and com.flag = false and com.type = 1L")
+    Long countFlagChat(Long x, Long y);
+
 }

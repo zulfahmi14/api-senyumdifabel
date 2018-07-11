@@ -18,4 +18,7 @@ public interface GroupsRepository extends JpaRepository<Groups,Long> {
 
     @Query("select u from People u where user_id = ?1")
     People findUser(Long id) ;
+
+    @Query("select u.peoples from PrevGroup u where id_prev = ?1")
+    List<People> findMember(Long id) ;
 }
