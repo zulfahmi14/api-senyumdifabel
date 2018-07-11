@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository< Notification, Long> {
 
-    @Query("select COUNT (n) from Notification n where n.user_id = ?1")
+    @Query("select COUNT (n) from Notification n where n.user_id = ?1 and n.enable = false")
     Long CountEnable(Long y) ;
 
     @Query("select u from Notification u where u.user_id = ?1 and u.enable = ?2")
