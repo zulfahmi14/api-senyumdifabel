@@ -1,6 +1,7 @@
 package com.example.senyumdifabel.job;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.bookmark.Bookmark;
 import com.example.senyumdifabel.params.JobCompany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +24,11 @@ public class JobController {
         return jobRepository.save(edu);
     }
 
-    @GetMapping("/auth/getjobs")
-    public List<JobCompany> show(){
+    @GetMapping("/auth/getjobs/{id}")   //id user
+    public List<JobCompany> show(@PathVariable(value = "id") Long id){
         List<JobCompany> send = new ArrayList<JobCompany>();
         List<Job> c = jobRepository.findAll();
+        List<Bookmark> mark = jobRepository.findBookmark(id);
         for(int i = 0 ; i < c.size() ; i++)
         {
             Long idx = c.get(i).getCompany_id();
@@ -38,12 +40,25 @@ public class JobController {
             temp.setName(c.get(i).getName());
             temp.setDescription(c.get(i).getDescription());
             temp.setCompany_id(c.get(i).getCompany_id());
+
+            //bookmark
+            temp.setFlag_bookmark(0L);
+            for (int j = 0; j < mark.size() ; j++){
+                if(c.get(i).getJob_id() == mark.get(j).getJob_id()){
+                    temp.setFlag_bookmark(1L);
+                    break;
+                }
+                else{
+                    temp.setFlag_bookmark(0L);
+                }
+            }
+
             send.add(temp);
         }
         return send;
     }
 
-    @GetMapping("/getJob/{id}") // job_id
+    @GetMapping("/auth/getjobdetail/{id}") // job_id
     public JobCompany getEdu(@PathVariable(value = "id") Long id){
         Job job = jobRepository.findJob(id) ;
         JobCompany send = new JobCompany();
@@ -54,7 +69,7 @@ public class JobController {
         send.setName(job.getName());
         send.setDescription(job.getDescription());
         send.setCompany_id(job.getCompany_id());
-        
+
         return send;
     }
 
