@@ -34,10 +34,20 @@ public class BookmarkController {
         return bookmarkRepository.save(peopleold);
     }
 
-    @DeleteMapping("/auth/deleteBookmark/{id}")
-    public boolean deletemark(@PathVariable(value = "id") Long id) {
-        Bookmark people = bookmarkRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
-        bookmarkRepository.delete(people);
-        return true;
+    @PostMapping("/auth/deleteBookmark")
+    public boolean deleteuser(@RequestBody Params x) {
+        Long x1 = x.getParam1() ;
+        Long x2 = x.getParam2() ;
+        Bookmark leave = bookmarkRepository.findDelete(x1,x2);
+        if(leave == null)
+        {
+            return false ;
+        }
+        else
+        {
+            followingRepository.delete(leave);
+            return true ;
+        }
+
     }
 }
