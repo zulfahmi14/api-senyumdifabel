@@ -43,10 +43,20 @@ public class JobController {
         return send;
     }
 
-//    @GetMapping("/getJob/{id}")
-//    public List<Job> getEdu(@PathVariable(value = "id") Long id){
-//        return jobRepository.findJob(id) ;
-//    }
+    @GetMapping("/getJob/{id}") // job_id
+    public JobCompany getEdu(@PathVariable(value = "id") Long id){
+        Job job = jobRepository.findJob(id) ;
+        JobCompany send = new JobCompany();
+        send.setCompany_name(jobRepository.findCompanyName(job.getCompany_id()));
+        send.setJob_id(job.getJob_id());
+        send.setDate(job.getDate());
+        send.setTime(job.getTime());
+        send.setName(job.getName());
+        send.setDescription(job.getDescription());
+        send.setCompany_id(job.getCompany_id());
+        
+        return send;
+    }
 
     @PutMapping("/auth/updateJob/{id}")
     public Job updatecv(@PathVariable(value = "id") Long id, @RequestBody Job peoplenew){
