@@ -3,6 +3,7 @@ package com.example.senyumdifabel.chat;
 import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.flagChat.FlagChat;
 import com.example.senyumdifabel.flagChat.FlagChatRepository;
+import com.example.senyumdifabel.params.Params;
 import com.example.senyumdifabel.prevChat.PrevChat;
 import com.example.senyumdifabel.prevChat.PrevChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,17 @@ public class ChatController {
         return chatRepository.findById(x).orElseThrow(() -> new ResourceNotFoundException("Id " + x.toString() + " not found"));
     }
 
-    @GetMapping("/auth/loadChat/{id}")
-    public List<Chat> getChat(@PathVariable(value ="id") Long x){
-        return chatRepository.loadChat(x);
+    @PostMapping("/auth/loadChat")
+    public List<Chat> getChat(@RequestBody Params x){
+        Long user_id = x.getParam1();
+        Long id_prev = x.getParam2();
+        List<FlagChat> flag = chatRepository.countFlagChat(user_id, id_prev);
+        for(int i=0 ; i<flag.size() ; i++)
+        {
+            flag.get(i).setFlag(true);
+            flagChatRepository.save(flag.get(i));
+        }
+        return chatRepository.loadChat(id_prev);
     }
 
     @DeleteMapping("/auth/deleteChat/{id}")

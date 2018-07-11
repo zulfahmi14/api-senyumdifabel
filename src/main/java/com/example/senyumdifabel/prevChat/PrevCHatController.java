@@ -58,7 +58,7 @@ public class PrevCHatController {
             temp.setTime(chat.get(i).getTime());
             temp.setSort_time(chat.get(i).getSort_time());
             temp.setPrev_chat(chat.get(i).getPrev_chat());
-            temp.setSize(1L);
+            temp.setSize(0L);
             temp.setUnread(prevChatRepository.countFlagChat(x, chat.get(i).getId()));
             chatgroup.add(temp);
         }

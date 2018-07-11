@@ -4,6 +4,7 @@ import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.flagChat.FlagChat;
 import com.example.senyumdifabel.flagChat.FlagChatRepository;
 import com.example.senyumdifabel.params.ChatGroup;
+import com.example.senyumdifabel.params.Params;
 import com.example.senyumdifabel.people.People;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
 import com.example.senyumdifabel.prevGroup.PrevGroupRepository;
@@ -55,8 +56,10 @@ public class GroupsController {
         return groupsRepository.findById(x).orElseThrow(() -> new ResourceNotFoundException("Id " + x.toString() + " not found"));
     }
 
-    @GetMapping("/auth/loadChatGroup/{id}")
-    public List<ChatGroup> loadGroup(@PathVariable(value ="id") Long x){
+    @PostMapping("/auth/loadChatGroup")
+    public List<ChatGroup> loadGroup(@RequestBody Params z){
+        Long y = z.getParam1() ; // user_id
+        Long x = z.getParam2() ; // id_prev
         List<ChatGroup> temp = new ArrayList<>() ;
         List<Groups> group;
         group = groupsRepository.loadGroupChat(x);
@@ -67,6 +70,12 @@ public class GroupsController {
             temp2.setName(p.getUser_name());
             temp2.setPhoto(p.getUser_photo());
             temp.add(temp2);
+        }
+        List<FlagChat> flag = groupsRepository.countFlagGroup(y, x);
+        for(int i=0 ; i<flag.size() ; i++)
+        {
+            flag.get(i).setFlag(true);
+            flagChatRepository.save(flag.get(i));
         }
         return temp ;
     }

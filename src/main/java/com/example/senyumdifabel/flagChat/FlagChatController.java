@@ -18,5 +18,5 @@ public class FlagChatController {
     public Long getCountFlag(@PathVariable(value = "id") Long id){
         return readRepository.findCountFlag(id, false);
     }
-    
+
 }
