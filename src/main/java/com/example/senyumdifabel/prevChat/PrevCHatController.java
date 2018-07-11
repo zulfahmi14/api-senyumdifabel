@@ -2,6 +2,7 @@ package com.example.senyumdifabel.prevChat;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
 import com.example.senyumdifabel.params.ChatList;
+import com.example.senyumdifabel.params.Params;
 import com.example.senyumdifabel.people.People;
 import com.example.senyumdifabel.prevGroup.PrevGroup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,14 @@ public class PrevCHatController {
     @PostMapping("/auth/addChat")
     public PrevChat addChat(@RequestBody PrevChat prevChat){
         return prevChatRepository.save(prevChat);
+    }
+
+    @PostMapping("/auth/checkRoom")
+    public Boolean check(@RequestBody Params p){
+        if(prevChatRepository.findRoom(p.getParam1(), p.getParam2())>0)
+            return true ;
+        else
+            return false ;
     }
 
     @GetMapping("/auth/listChat/{id}") // user_id

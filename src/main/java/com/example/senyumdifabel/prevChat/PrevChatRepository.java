@@ -13,6 +13,9 @@ public interface PrevChatRepository  extends JpaRepository<PrevChat,Long> {
     @Query("select u from PrevChat u where u.peopleA = ?1 or u.peopleB = ?1")
     List<PrevChat> findMyChat(Long idx);
 
+    @Query("select COUNT (u) from PrevChat u where (u.peopleA = ?1 and u.peopleB = ?2) or (u.peopleA = ?2 and u.peopleB = ?1)")
+    Long findRoom(Long id1, Long id2);
+
     @Query("select u from PrevGroup u where u.id_prev = ?1")
     PrevGroup findMyGroup(Long idx);
 
