@@ -58,16 +58,31 @@ public class People extends User {
 
 //    @Column(nullable = false)
     protected String cv;
+    protected String user_job ;
 
     public People() {
     }
 
-    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, String cv) {
-        super(user_name, user_email, user_password, user_address, user_photo, user_contact);
+    public People(String cv, String user_job) {
         this.cv = cv;
+        this.user_job = user_job;
     }
 
-//    @JsonIgnore
+    public People(String user_name, String user_email, String user_password, String user_address, String user_photo, String user_contact, String cv, String user_job) {
+        super(user_name, user_email, user_password, user_address, user_photo, user_contact);
+        this.cv = cv;
+        this.user_job = user_job;
+    }
+
+    public String getUser_job() {
+        return user_job;
+    }
+
+    public void setUser_job(String user_job) {
+        this.user_job = user_job;
+    }
+
+    //    @JsonIgnore
     public List<Timeline> getTimelines() {
         return timelines;
     }

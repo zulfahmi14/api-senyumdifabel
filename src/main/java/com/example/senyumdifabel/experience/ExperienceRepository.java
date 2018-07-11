@@ -1,5 +1,6 @@
 package com.example.senyumdifabel.experience;
 
+import com.example.senyumdifabel.people.People;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,7 @@ public interface ExperienceRepository extends JpaRepository< Experience, Long> {
 
     @Query("select u from Experience u where u.user_id = ?1 order by u.id desc")
     List<Experience> findJob(Long user_id);
+
+    @Query("select u from People u where u.user_id = ?1")
+    People findUser(Long user_id);
 }
