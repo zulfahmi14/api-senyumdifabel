@@ -14,7 +14,6 @@ public class Proposal {
     @Column(nullable = false)
     protected Long status ;
 
-    @Column(nullable = false)
     protected Long company_id ;
 
     @Column(nullable = false)

@@ -31,6 +31,8 @@ public class GroupsController {
     @PostMapping("/auth/sendMessageGroup")
     public Groups sendMessage(@RequestBody Groups group){
         PrevGroup prev = groupsRepository.findPrev(group.getId_prev());
+        if(prev == null)
+            return groupsRepository.save(group);
         prev.setSort_time(group.getSort_time());
         prev.setPrev_chat(group.getMessage());
         prev.setDate(group.getDate());

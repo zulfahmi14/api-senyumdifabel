@@ -27,7 +27,11 @@ public class PrevCHatController {
 
     @PostMapping("/auth/checkRoom")
     public PrevChat check(@RequestBody Params p){
-        return prevChatRepository.findRoom(p.getParam1(), p.getParam2()) ;
+        PrevChat x = prevChatRepository.findRoom(p.getParam1(), p.getParam2());
+        if(x == null)
+            return new PrevChat(0L, 0L, "kosong", "kosong", "kosong", 0L);
+        else
+            return x ;
     }
 
     @GetMapping("/auth/listChat/{id}") // user_id

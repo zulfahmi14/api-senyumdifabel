@@ -1,9 +1,11 @@
 package com.example.senyumdifabel.timeline;
+import com.example.senyumdifabel.comment.Comment;
 import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.following.Following;
 //import com.example.senyumdifabel.people.People;
 //import com.example.senyumdifabel.likes.Likes;
 //import com.example.senyumdifabel.comment.Comment;
+import com.example.senyumdifabel.likes.Likes;
 import com.example.senyumdifabel.people.People;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -34,7 +36,10 @@ public interface TimelineRepository  extends JpaRepository<Timeline,Long>  {
     @Query("select COUNT (com) from Comment com where com.timeline_id = ?1")
     Long FindCountComment(Long y);
 
+    @Query("select u from Comment u where u.timeline_id = ?1")
+    List<Comment> findCom(long y) ;
 
-//    @Query("select t from Timeline t inner join t.comment where t.user_id = ?1")
-//    List<Timeline> findTimelinekeren(Long user_id);
+    @Query("select u from Likes u where u.timeline_id = ?1")
+    List<Likes> findLike(long y) ;
+
 }

@@ -1,8 +1,12 @@
 package com.example.senyumdifabel.timeline;
 
 import com.example.senyumdifabel.ResourceNotFoundException;
+import com.example.senyumdifabel.comment.Comment;
+import com.example.senyumdifabel.comment.CommentRepository;
 import com.example.senyumdifabel.experience.Experience;
 import com.example.senyumdifabel.following.Following;
+import com.example.senyumdifabel.likes.Likes;
+import com.example.senyumdifabel.likes.LikesRepository;
 import com.example.senyumdifabel.params.TimelineUser;
 import com.example.senyumdifabel.people.People;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +20,14 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class TimelineController {
     private TimelineRepository timelineRepository;
+    private CommentRepository commentRepository ;
+    private LikesRepository likesRepository ;
 
     @Autowired
-    public TimelineController(TimelineRepository timelineRepository) {
+    public TimelineController(TimelineRepository timelineRepository, CommentRepository commentRepository, LikesRepository likesRepository) {
         this.timelineRepository = timelineRepository;
+        this.commentRepository = commentRepository;
+        this.likesRepository = likesRepository;
     }
 
     @PostMapping("/auth/postTimeline")
@@ -154,6 +162,16 @@ public class TimelineController {
     @DeleteMapping("/auth/deleteTimeline/{id}")
     public boolean deleteTimeline(@PathVariable(value = "id") Long id){
         Timeline timeline = timelineRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+        List<Comment> com = timelineRepository.findCom(id);
+        for(int i=0 ; i<com.size() ; i++)
+        {
+            commentRepository.delete(com.get(i));
+        }
+        List<Likes> likes = timelineRepository.findLike(id);
+        for(int i=0 ; i<likes.size() ; i++)
+        {
+            likesRepository.delete(likes.get(i));
+        }
         timelineRepository.delete(timeline);
         return true;
     }

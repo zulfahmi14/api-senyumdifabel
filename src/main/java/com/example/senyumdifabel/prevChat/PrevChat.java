@@ -38,6 +38,8 @@ public class PrevChat {
         this.sort_time = sort_time;
     }
 
+
+
     public Long getSort_time() {
         return sort_time;
     }

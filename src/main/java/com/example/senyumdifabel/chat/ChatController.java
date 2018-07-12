@@ -27,24 +27,30 @@ public class ChatController {
 
     @PostMapping("/auth/sendMessage")
     public Chat sendMessage(@RequestBody Chat chat){
+        chatRepository.save(chat);
         PrevChat prev = chatRepository.findPrev(chat.getId_prev());
-        prev.setSort_time(chat.getSort_time());
-        prev.setPrev_chat(chat.getMessage());
-        prev.setDate(chat.getDate());
-        prev.setTime(chat.getTime());
-        prevChatRepository.save(prev);
-
-        FlagChat flagChat = new FlagChat();
-        flagChat.setId_prev(chat.getId_prev());
-        flagChat.setFlag(false);
-        flagChat.setType(1L);
-        if(chat.getSender() == prev.getPeopleA())
-            flagChat.setUser_id(prev.getPeopleB());
+        if(prev == null)
+            return chat ;
         else
-            flagChat.setUser_id(prev.getPeopleB());
-        flagChatRepository.save(flagChat);
+        {
+            prev.setSort_time(chat.getSort_time());
+            prev.setPrev_chat(chat.getMessage());
+            prev.setDate(chat.getDate());
+            prev.setTime(chat.getTime());
+            prevChatRepository.save(prev);
 
-        return chatRepository.save(chat);
+            FlagChat flagChat = new FlagChat();
+            flagChat.setId_prev(chat.getId_prev());
+            flagChat.setFlag(false);
+            flagChat.setType(1L);
+            if(chat.getSender() == prev.getPeopleA())
+                flagChat.setUser_id(prev.getPeopleB());
+            else
+                flagChat.setUser_id(prev.getPeopleB());
+            flagChatRepository.save(flagChat);
+        }
+
+        return chat;
     }
 
     @GetMapping("/auth/getChat/{id}")
